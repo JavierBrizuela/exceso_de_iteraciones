@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
+
+[scripts]
+server          = "python manage.py runserver"
+migrate         = "python manage.py migrate"
+startapp        = "python manage.py startapp"
+makemigrations  = "python manage.py makemigrations"
+createsuperuser = "python manage.py createsuperuser"
+test            = "python manage.py test"
