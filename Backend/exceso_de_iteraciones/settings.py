@@ -43,10 +43,11 @@ BASE_APPS = [
 ]
 THIRD_APPS = [
     'rest_framework',
+    'drf_spectacular',
+    'rest_framework_simplejwt',
 ]
 
 OWN_APPS = [
-    #'apps.abstracts',
     'apps.accounts',
 ]
 
@@ -142,8 +143,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Custom user model
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+#Rest framework setting
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+#Espectacular Schema setting
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Exceso de iteraciones',
+    'DESCRIPTION': 'Crear una plataforma web colaborativa donde los usuarios del rubro IT puedan encontrar y colaborar en proyectos hechos específicamente por juniors para juniors con la finalidad de encontrar oportunidades de aprendizaje, desarrollo continuo y oportunidad de hacer networking.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
+#Simple JWT setting
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    }
