@@ -22,7 +22,34 @@ class UserCreateSerializer(serializers.ModelSerializer):
     def validate_password(self, value):
         #Encrypt password
         return make_password(value)
+
+class ProfileSerialer(serializers.ModelSerializer):
     
+    class Meta:
+        model = get_user_model()
+        fields = ('email', 'first_name', 'last_name', 'photo')
+        
+    def validate_email(self, value):
+        
+        if get_user_model().objects.filter(email=value).exists():
+            if self.request.user != value:
+                raise ValidationError(_('Email already exists'))
+        return value
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        if instance.is_moderator:
+            representation['permissions'] = 'moderator'
+            
+        elif instance.is_colaborator:
+            representation['permissions'] = 'colaborator'
+        
+        else :    
+            representation['permissions'] = 'user'
+            
+        return representation
+        
 class TokenObtainSerilizer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
