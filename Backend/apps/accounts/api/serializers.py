@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django import forms
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -22,6 +23,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
     def validate_password(self, value):
         #Encrypt password
         return make_password(value)
+    
     
 class TokenObtainSerilizer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -47,3 +49,8 @@ class TokenResponseSerilizer(serializers.Serializer):
     user_last_name = serializers.CharField()
     user_photo = serializers.CharField()
     user_email = serializers.CharField()
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput())
+    new_password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
