@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -50,7 +50,24 @@ class TokenResponseSerilizer(serializers.Serializer):
     user_photo = serializers.CharField()
     user_email = serializers.CharField()
 
-class ChangePasswordForm(forms.Form):
+""" class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput())
     new_password = forms.CharField(widget=forms.PasswordInput())
-    confirm_password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password = forms.CharField(widget=forms.PasswordInput()) """
+    
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(min_length=8, max_length=255, write_only=True, required=True, allow_null=False)
+    new_password = serializers.CharField(min_length=8, max_length=255, write_only=True, required=True, allow_null=False)
+    confirm_password = serializers.CharField(min_length=8, max_length=255, write_only=True, required=True, allow_null=False)
+    
+    def validate_old_password(self, value):
+        user = self.context.get('user')
+        if authenticate(username=user, password=value):
+            return value
+        raise serializers.ValidationError(_('wrong password'))
+    
+    def validate(self, data):
+        if data['new_password'] == data['confirm_password']:
+            return data
+        raise serializers.ValidationError(_('new passwords do not match'))
+    

@@ -4,8 +4,8 @@ from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from apps.accounts.api.viewsets import Signup
-from apps.accounts.views import Login, ChangePasswordView
+from apps.accounts.api.viewsets import Signup, ChangePasswordView
+from apps.accounts.views import Login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,5 +15,7 @@ urlpatterns = [
     path('api/signup/', Signup.as_view(), name='signup'),
     path('api/login/', Login.as_view(), name='login'),
     path('api/login/refresh', TokenRefreshView.as_view(), name='refresh'),
+    #path('change-password/', ChangePasswordView.as_view(), name='change_password'),
     path('change-password/', ChangePasswordView.as_view(), name='change_password'),
+    
 ]
