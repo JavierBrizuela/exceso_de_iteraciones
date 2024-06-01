@@ -1,0 +1,8 @@
+body {
+  background-color: var(--light-pistachio);
+}
+
+.form {
+  background-color: red;
+  width: 80vh;
+}
