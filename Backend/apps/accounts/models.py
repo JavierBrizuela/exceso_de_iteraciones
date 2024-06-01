@@ -18,6 +18,7 @@ class CustomUser(AbstractModel, AbstractBaseUser):
         email (str): User's email, must be unique.
         first_name (str): User's first name, optional.
         last_name (str): User's last name, optional.
+        username (str): Username, optional
         photo (str): URL of the user's photo, optional.
         is_collaborator (bool): Indicates if the user is a collaborator.
         is_moderator (bool): Indicates if the user is a moderator.
@@ -28,6 +29,7 @@ class CustomUser(AbstractModel, AbstractBaseUser):
     email = models.EmailField(unique=True, null=False, blank=False)
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=True, blank=True)
+    username = models.CharField(max_length=50, null=True, blank=True)
     photo = models.CharField(max_length=255, null=True, blank=True)
     is_active  = models.BooleanField(default=True)
     is_colaborator = models.BooleanField(default=False)

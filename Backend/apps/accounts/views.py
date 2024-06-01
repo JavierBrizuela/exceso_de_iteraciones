@@ -15,10 +15,3 @@ from .api.serializers import TokenObtainSerilizer, TokenResponseSerilizer
 class Login(TokenObtainPairView):
     
     serializer_class = TokenObtainSerilizer
-
-
-""" 
-    class ChangePasswordView(PasswordChangeView):
-    form_class = PasswordChangeForm
-    success_url = reverse_lazy('home')
-    template_name = 'change_password.html' """

@@ -11,7 +11,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('email', 'first_name', 'last_name', 'password', 'photo')
+        fields = ('email', 'first_name', 'last_name', 'username', 'password', 'photo')
         extra_kwargs = {"password": {"write_only": True}}
     
     def validate_email(self, value):
@@ -24,11 +24,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         #Encrypt password
         return make_password(value)
 
-class ProfileSerialer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = get_user_model()
-        fields = ('email', 'first_name', 'last_name', 'photo')
+        fields = ('email', 'first_name', 'last_name', 'username', 'photo')
         
     def validate_email(self, value):
         
@@ -60,6 +60,7 @@ class TokenObtainSerilizer(TokenObtainPairSerializer):
                 'user_id':self.user.id,
                 'user_first_name':self.user.first_name,
                 "user_last_name": self.user.last_name,
+                "user_username": self.user.username,
                 "user_photo": self.user.photo,
                 "user_email": self.user.email
                 }
@@ -73,6 +74,7 @@ class TokenResponseSerilizer(serializers.Serializer):
     user_id = serializers.CharField()
     user_first_name = serializers.CharField()
     user_last_name = serializers.CharField()
+    user_username = serializers.CharField()
     user_photo = serializers.CharField()
     user_email = serializers.CharField()
     
