@@ -1,5 +1,8 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 
 from .api.serializers import TokenObtainSerilizer, TokenResponseSerilizer
 
@@ -12,3 +15,10 @@ from .api.serializers import TokenObtainSerilizer, TokenResponseSerilizer
 class Login(TokenObtainPairView):
     
     serializer_class = TokenObtainSerilizer
+
+
+""" 
+    class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('home')
+    template_name = 'change_password.html' """

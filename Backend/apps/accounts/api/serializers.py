@@ -1,7 +1,8 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django import forms
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -32,7 +33,7 @@ class ProfileSerialer(serializers.ModelSerializer):
     def validate_email(self, value):
         
         if get_user_model().objects.filter(email=value).exists():
-            if self.request.user != value:
+            if self.instance.email != value:
                 raise ValidationError(_('Email already exists'))
         return value
     
@@ -74,3 +75,20 @@ class TokenResponseSerilizer(serializers.Serializer):
     user_last_name = serializers.CharField()
     user_photo = serializers.CharField()
     user_email = serializers.CharField()
+    
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(min_length=8, max_length=255, write_only=True, required=True, allow_null=False)
+    new_password = serializers.CharField(min_length=8, max_length=255, write_only=True, required=True, allow_null=False)
+    confirm_password = serializers.CharField(min_length=8, max_length=255, write_only=True, required=True, allow_null=False)
+    
+    def validate_old_password(self, value):
+        user = self.context.get('user')
+        if authenticate(username=user, password=value):
+            return value
+        raise serializers.ValidationError(_('wrong password'))
+    
+    def validate(self, data):
+        if data['new_password'] == data['confirm_password']:
+            return data
+        raise serializers.ValidationError(_('new passwords do not match'))
+    
