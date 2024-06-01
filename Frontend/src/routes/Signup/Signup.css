@@ -2,7 +2,82 @@ body {
   background-color: var(--light-pistachio);
 }
 
+.form-signup {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
 .form {
-  background-color: red;
+  padding: 2rem;
+  background: linear-gradient(to bottom, var(--blue), var(--green));
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
   width: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.signup-titles {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+}
+
+.signup-titles h1,
+.signup-titles h2 {
+  color: var(--font-color);
+}
+
+.signup-titles h1 {
+  font-size: 2rem;
+}
+
+.signup-titles h2 {
+  font-size: 1.5rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+}
+
+.input-icon {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+
+.name,
+.surname {
+  background-image: url(../../assets/icon-user.png);
+}
+
+.username {
+  background-image: url(../../assets/icon-username.png);
+}
+
+.email {
+  background-image: url(../../assets/icon-mail.png);
+}
+
+.password,
+.password-repeat {
+  background-image: url(../../assets/icon-password.png);
 }

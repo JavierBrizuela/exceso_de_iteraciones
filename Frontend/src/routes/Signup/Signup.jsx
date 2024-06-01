@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import Input from "./components/Input";
 import "./Signup.css";
 
 function Signup() {
@@ -23,77 +24,89 @@ function Signup() {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <h1>¡Bienvenid@ a Develmatch!</h1>
-      <h2>¿Comenzamos la aventura?</h2>
+    <section className="form-signup">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="signup-titles">
+          <h1>¡Bienvenid@ a Develmatch!</h1>
+          <h2>¿Comenzamos la aventura?</h2>
+        </div>
 
-      <div className="form-container">
-        <div className="input-group">
-          <div>
-            <label htmlFor="nombre" className="input-icon"></label>
-            <input
+        <div className="form-container">
+          <div className="input-group">
+            <Input
+              id="nombre"
+              registerProps={register("nombre", { required: "El nombre es obligatorio" })}
               type="text"
               placeholder="Nombre"
-              {...register("nombre", { required: "El nombre es obligatorio" })}
+              icon="name"
+              errorMessage={errors.nombre && errors.nombre.message}
             />
-            {errors.nombre && <span>{errors.nombre.message}</span>}
-          </div>
-          <div>
-            <label htmlFor="apellido" className="input-icon"></label>
-            <input
+            <Input
+              id="apellido"
+              registerProps={register("apellido", { required: "El apellido es obligatorio" })}
               type="text"
               placeholder="Apellido"
-              {...register("apellido", { required: "El apellido es obligatorio" })}
+              icon="surname"
+              errorMessage={errors.apellido && errors.apellido.message}
             />
-            {errors.apellido && <span>{errors.apellido.message}</span>}
+          </div>
+          <div className="input-group">
+            <Input
+              id="username"
+              registerProps={register("username", {
+                required: "El nombre de usuario es obligatorio",
+              })}
+              type="text"
+              placeholder="Nombre de usuario"
+              icon="username"
+              errorMessage={errors.username && errors.username.message}
+            />
+          </div>
+          <div className="input-group">
+            <Input
+              id="email"
+              registerProps={register("email", {
+                required: "El email es obligatorio",
+                pattern: {
+                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                  message: "El formato del email es incorrecto",
+                },
+              })}
+              type="email"
+              placeholder="usuario@ejemplo.es"
+              icon="email"
+              errorMessage={errors.email && errors.email.message}
+            />
+          </div>
+          <div className="input-group">
+            <Input
+              id="password"
+              registerProps={register("password", {
+                required: "El contraseña es obligatorio",
+              })}
+              type="password"
+              placeholder="Contraseña"
+              icon="password"
+              errorMessage={errors.password && errors.password.message}
+            />
+          </div>
+          <div className="input-group">
+            <Input
+              id="passwordRepeat"
+              registerProps={register("passwordRepeat", {
+                required: "Debe repetir la contraseña",
+              })}
+              type="password"
+              placeholder="Repite la contraseña"
+              icon="password-repeat"
+              errorMessage={errors.passwordRepeat && errors.passwordRepeat.message}
+            />
           </div>
         </div>
-        <div className="input-group">
-          <label htmlFor="nombre-de-usuario" className="input-icon"></label>
-          <input
-            type="text"
-            placeholder="Nombre de usuario"
-            {...register("nombreDeUsuario", { required: "El nombre de usuario es obligatorio" })}
-          />
-          {errors.nombreDeUsuario && <span>{errors.nombreDeUsuario.message}</span>}
-        </div>
-        <div className="input-group">
-          <label htmlFor="email" className="input-icon"></label>
-          <input
-            type="email"
-            placeholder="usuario@ejemplo.es"
-            {...register("email", {
-              required: "El email es obligatorio",
-              pattern: {
-                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                message: "El formato del email es incorrecto",
-              },
-            })}
-          />
-          {errors.email && <span>{errors.email.message}</span>}
-        </div>
-        <div className="input-group">
-          <label htmlFor="clave" className="input-icon"></label>
-          <input
-            type="password"
-            placeholder="Contraseña"
-            {...register("clave", { required: "La contraseña es obligatoria" })}
-          />
-          {errors.clave && <span>{errors.clave.message}</span>}
-        </div>
-        <div className="input-group">
-          <label htmlFor="repite-clave" className="input-icon"></label>
-          <input
-            type="password"
-            placeholder="Repite la contraseña"
-            {...register("repiteClave", { required: "Debe repetir la contraseña" })}
-          />
-          {errors.repiteClave && <span>{errors.repiteClave.message}</span>}
-        </div>
-      </div>
 
-      <button type="submit">Registrarse</button>
-    </form>
+        <button type="submit">Registrarse</button>
+      </form>
+    </section>
   );
 }
 
