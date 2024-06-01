@@ -1,3 +1,4 @@
+import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./routes/Root";
 import Home from "./routes/Home";

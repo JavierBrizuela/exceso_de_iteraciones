@@ -1,0 +1,15 @@
+:root {
+  --blue: #01afee;
+  --green: #70d468;
+  --pistachio: #4cc894;
+  --dark-blue: #002330;
+  --dark-green: #2b5128;
+  --dark-pistachio: #153829;
+  --light-blue: #cff0fc;
+  --light-green: #e2f6e1;
+  --light-pistachio: #dbf4ea;
+}
+
+body {
+  font-family: "Spline Sans Mono", monospace;
+}
