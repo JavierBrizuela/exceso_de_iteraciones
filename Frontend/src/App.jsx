@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <Toaster />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </>
   );
 }
