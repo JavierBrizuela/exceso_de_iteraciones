@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "./components/Input";
 import "./Signup.css";
+import { toast } from "react-hot-toast";
 
 function Signup() {
   const {
@@ -12,16 +13,26 @@ function Signup() {
 
   const onSubmit = (data) => {
     console.log(data);
-    fetch("http://127.0.0.1:8000/api/signup", {
+    fetch("http://127.0.0.1:8000/api/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        email: data.email,
+        first_name: data.nombre,
+        last_name: data.apellido,
+        username: data.username,
+        password: data.password,
+      }),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.email?.includes("Ya existe Usuario con este email.")) {
+          toast.error("Ya existe un usuario con este email");
+        }
+        console.log(data);
+      });
   };
 
   const password = watch("password", "");
