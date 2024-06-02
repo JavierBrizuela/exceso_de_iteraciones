@@ -150,3 +150,21 @@ body {
   background-color: var(--font-color);
   color: var(--dark-blue);
 }
+
+@media (max-width: 470px) {
+  .form-signup {
+    padding: 3rem 1.5rem;
+  }
+
+  .form {
+    padding: 1.5rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-right input {
+    font-size: 0.8rem;
+  }
+}
