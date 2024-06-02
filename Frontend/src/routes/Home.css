@@ -1,0 +1,22 @@
+.projects-home {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: red;
+}
+
+.projects {
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.projects h1 {
+  font-size: 2rem;
+}
+
+.create-account {
+  background-color: green;
+}
