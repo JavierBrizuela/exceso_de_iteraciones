@@ -7,6 +7,7 @@ function Signup() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -22,6 +23,8 @@ function Signup() {
       .then((response) => response.json())
       .then((data) => console.log(data));
   };
+
+  const password = watch("password", "");
 
   return (
     <section className="form-signup">
@@ -55,6 +58,19 @@ function Signup() {
               id="username"
               registerProps={register("username", {
                 required: "El nombre de usuario es obligatorio",
+                minLength: {
+                  value: 3,
+                  message: "El nombre de usuario debe tener al menos 3 caracteres",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "El nombre de usuario no puede tener más de 20 caracteres",
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9ñÑ_-]+$/,
+                  message:
+                    "El nombre de usuario solo puede contener letras, números, la letra ñ o Ñ, guiones bajos (_) y guiones medios (-)",
+                },
               })}
               type="text"
               placeholder="Nombre de usuario"
@@ -82,7 +98,13 @@ function Signup() {
             <Input
               id="password"
               registerProps={register("password", {
-                required: "La contraseña es obligatorio",
+                required: "La contraseña es obligatoria",
+                minLength: { value: 8, message: "La contraseña debe tener al menos 8 caracteres" },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]+$/,
+                  message:
+                    "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
+                },
               })}
               type="password"
               placeholder="Contraseña"
@@ -95,6 +117,7 @@ function Signup() {
               id="passwordRepeat"
               registerProps={register("passwordRepeat", {
                 required: "Debe repetir la contraseña",
+                validate: (value) => value === password || "Las contraseñas no coinciden",
               })}
               type="password"
               placeholder="Repite la contraseña"
