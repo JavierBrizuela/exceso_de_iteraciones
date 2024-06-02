@@ -17,4 +17,5 @@
 
 body {
   font-family: "Spline Sans Mono", monospace;
+  background-color: var(--light-pistachio);
 }
