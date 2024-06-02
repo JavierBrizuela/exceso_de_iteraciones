@@ -1,13 +1,23 @@
 import PropTypes from "prop-types";
 
 function Input({ id, registerProps, type, placeholder, errorMessage, icon }) {
+  const InputClass = () => {
+    if (errorMessage) {
+      return "input-invalid";
+    }
+
+    return "";
+  };
+
   return (
     <div className="input-wrapper">
-      <label htmlFor={id}>
-        <i className={`input-icon ${icon}`}></i>
-      </label>
-      <input type={type} placeholder={placeholder} {...registerProps} />
-      {errorMessage && <span>{errorMessage}</span>}
+      <div className="input-right">
+        <label htmlFor={id} className={InputClass()}>
+          <i className={`input-icon ${icon}`}></i>
+        </label>
+        <input type={type} placeholder={placeholder} {...registerProps} className={InputClass()} />
+      </div>
+      {errorMessage && <span className="error-message">{errorMessage}</span>}
     </div>
   );
 }
