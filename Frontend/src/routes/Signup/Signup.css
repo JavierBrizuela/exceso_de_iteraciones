@@ -113,4 +113,20 @@ body {
 }
 
 .register {
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  color: var(--font-color);
+  background-color: var(--dark-blue);
+  transition: all 0.6s ease;
+  font-weight: bold;
+}
+
+.register:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background-color: var(--font-color);
+  color: var(--dark-blue);
 }
