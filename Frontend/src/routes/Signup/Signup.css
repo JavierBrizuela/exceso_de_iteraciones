@@ -43,7 +43,7 @@ body {
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
 }
 
@@ -56,9 +56,15 @@ body {
 .input-wrapper {
   display: flex;
   width: 100%;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.input-wrapper label {
+.input-right {
+  display: flex;
+}
+
+.input-right label {
   background-color: var(--background-icon);
   width: 1.8rem;
   height: 1.8rem;
@@ -71,6 +77,11 @@ body {
   padding: 0.3rem;
 }
 
+.input-right label.input-invalid {
+  background-color: var(--wrong-input);
+  outline: solid var(--wrong-input);
+}
+
 .input-icon {
   display: block;
   background-position: center;
@@ -79,7 +90,7 @@ body {
   height: 100%;
 }
 
-.input-wrapper input {
+.input-right input {
   width: 100%;
   padding: 0 0.5rem;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
@@ -90,8 +101,12 @@ body {
   color: var(--input-font);
 }
 
-.input-wrapper input:focus {
-  outline: solid var(--right-input);
+.input-right input.input-invalid {
+  outline: solid var(--wrong-input);
+}
+
+.input-right input:focus {
+  outline: solid var(--background-icon);
 }
 
 .name,
@@ -110,6 +125,11 @@ body {
 .password,
 .password-repeat {
   background-image: url(../../assets/icon-password.png);
+}
+
+.error-message {
+  color: white;
+  font-size: 0.8rem;
 }
 
 .register {

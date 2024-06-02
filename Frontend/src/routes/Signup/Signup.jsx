@@ -82,7 +82,7 @@ function Signup() {
             <Input
               id="password"
               registerProps={register("password", {
-                required: "El contraseña es obligatorio",
+                required: "La contraseña es obligatorio",
               })}
               type="password"
               placeholder="Contraseña"
