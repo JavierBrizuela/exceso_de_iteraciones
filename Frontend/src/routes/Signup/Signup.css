@@ -50,18 +50,48 @@ body {
 .input-group {
   display: flex;
   width: 100%;
+  gap: 1rem;
 }
 
 .input-wrapper {
   display: flex;
+  width: 100%;
+}
+
+.input-wrapper label {
+  background-color: var(--background-icon);
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem 0 0 0.5rem;
+  border: none;
+  padding: 0.3rem;
 }
 
 .input-icon {
   display: block;
   background-position: center;
   background-size: cover;
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 0 0.5rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 0 0.5rem 0.5rem 0;
+  border: none;
+  background: var(--font-color);
+  outline: none;
+  color: var(--input-font);
+}
+
+.input-wrapper input:focus {
+  outline: solid var(--right-input);
 }
 
 .name,
@@ -80,4 +110,7 @@ body {
 .password,
 .password-repeat {
   background-image: url(../../assets/icon-password.png);
+}
+
+.register {
 }
