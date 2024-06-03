@@ -11,8 +11,8 @@
   --font-color: white;
   --background-icon: #4285f4;
   --input-font: #747474;
-  --right-input: ;
   --wrong-input: #f95454;
+  --transparency: #a4a4a478;
 }
 
 body {
