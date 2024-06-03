@@ -1,14 +1,14 @@
 import "./Home.css";
+import Card from "./components/Card";
 
 function Home() {
   return (
     <section className="projects-home">
       <div className="projects">
-        <h1>Descubre algunos de estos proyectos</h1>
+        <h1 className="projects-title">Descubre algunos de estos proyectos</h1>
         <div className="project-list">
-          <h1>hola1</h1>
-          <h1>hola2</h1>
-          <h1>hola3</h1>
+          <Card />
+          <Card />
         </div>
       </div>
       <div className="create-account">
