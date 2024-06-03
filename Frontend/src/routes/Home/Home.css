@@ -3,18 +3,23 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  background-color: red;
 }
 
 .projects {
-  background-color: blue;
   display: flex;
   flex-direction: column;
   text-align: center;
+  gap: 2rem;
 }
 
-.projects h1 {
+.projects-title {
   font-size: 2rem;
+  color: var(--dark-blue);
+}
+
+.project-list {
+  display: flex;
+  gap: 1rem;
 }
 
 .create-account {
