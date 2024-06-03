@@ -74,8 +74,8 @@ function Signup() {
                   message: "El nombre de usuario debe tener al menos 3 caracteres",
                 },
                 maxLength: {
-                  value: 20,
-                  message: "El nombre de usuario no puede tener más de 20 caracteres",
+                  value: 15,
+                  message: "El nombre de usuario no puede tener más de 15 caracteres",
                 },
                 pattern: {
                   value: /^[a-zA-Z0-9ñÑ_-]+$/,
