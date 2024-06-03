@@ -8,7 +8,7 @@
 
 .card-wrapper {
   background: linear-gradient(to bottom, var(--blue), var(--green));
-  width: 300px;
+  min-width: 270px;
   min-height: 290px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 0.5rem;
@@ -49,6 +49,11 @@
 }
 
 .second-division-info {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
 }
 
 .tag {
@@ -57,6 +62,8 @@
   border-color: white;
   border: 1px solid white;
   font-size: 0.7rem;
+  display: flex;
+  align-items: center;
 }
 
 .project-type {

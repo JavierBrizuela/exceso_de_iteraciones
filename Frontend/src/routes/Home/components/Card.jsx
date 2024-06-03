@@ -19,8 +19,8 @@ function Card({ id, title, type, difficulty, languages, created_by, actual_statu
             <span className="project-languages">C#</span>
             <span className="project-languages">SQL</span>
             <span className="project-languages">Go</span>
-            <span className="project-languages">Visual Basic</span>
             <span className="project-languages">PHP</span>
+            <span className="project-languages">Visual Basic</span>
             <span className="project-languages">Fortran</span>
             <span className="project-languages">Otros</span>
           </div>
