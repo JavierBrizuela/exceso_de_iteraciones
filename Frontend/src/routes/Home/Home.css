@@ -75,3 +75,14 @@
   background: linear-gradient(to bottom, var(--blue), var(--green));
   box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.548);
 }
+
+@media (max-width: 785px) {
+  .account-home-principal-text {
+    flex-direction: column;
+    font-size: 1rem;
+  }
+
+  .account-home-secondary-text {
+    font-size: 1rem;
+  }
+}
