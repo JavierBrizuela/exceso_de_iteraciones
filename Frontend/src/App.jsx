@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Root from "./routes/Root";
 import Home from "./routes/Home/Home";
 import Signup from "./routes/Signup/Signup";
+import Details from "./routes/ProjectDetails/ProjectDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "projectdetails",
+        element: <Details />,
       },
     ],
   },
