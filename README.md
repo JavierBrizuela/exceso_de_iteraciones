@@ -178,24 +178,30 @@ $ pyenv global 3.12.3
 
 <details>
 <summary>Más información:</summary>
+  
 - GitHub: [ElenaExposito](https://github.com/ElenaExposito)
-- Linkedin: [Elena Expósito](https://www.linkedin.com/in/elena-exp%C3%B3sito-lara/)
+- Linkedin: [Elena Expósito Lara](https://www.linkedin.com/in/elena-exp%C3%B3sito-lara/)
+  
 </details>
 
 #### 👩‍💻 **Marina Matas Mata**
 
 <details>
 <summary>Más información:</summary>
-- GitHub: []()
+  
+- GitHub: [Marinamaatas](https://github.com/Marinamaatas)
 - Linkedin: [Marina Matas Mata](https://www.linkedin.com/in/marina-matas-mata-developer/)
+
 </details>
 
 #### 👩‍💻 **Laura**
 
 <details>
 <summary>Más información:</summary>
-- GitHub: []()
-- Linkedin: []()
+  
+- GitHub: [lauriiief](https://github.com/lauriiief)
+- Linkedin: [Laura Español](https://www.linkedin.com/in/laura-espa%C3%B1ol/)
+  
 </details>
 
 ---
@@ -206,14 +212,18 @@ $ pyenv global 3.12.3
 
 <details>
 <summary>Más información:</summary>
+  
 - GitHub: [JavierBrizuela](https://github.com/JavierBrizuela)
 - Linkedin: [JavierBrizuela]()
+  
 </details>
 
 #### 👨‍💻 **Jorge Fuentes**
 
 <details>
 <summary>Más información:</summary>
+  
 - GitHub: [jorge-fuentes-94](https://github.com/jorge-fuentes-94)
 - Linkedin: []()
+  
 </details>
