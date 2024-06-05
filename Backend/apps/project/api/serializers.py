@@ -28,6 +28,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = (
             'id',
+            'created_by',
             'title',
             'type',
             'description',
@@ -40,3 +41,4 @@ class ProjectSerializer(serializers.ModelSerializer):
          def create(self, validated_data):
             validated_data['created_by'] = 
             return Project.objects.create(**validated_data) """
+            

@@ -23,7 +23,7 @@ STATUS = [
 ]
 
 class Project(AbstractModel):
-    created_by = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=50, choices=PROJECT_TYPE, )
     description = models.TextField()

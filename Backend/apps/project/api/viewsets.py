@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework import status
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from django.utils.translation import gettext_lazy as _
 
@@ -24,5 +26,21 @@ class ProjectModelViewSet(ModelViewSet):
     #list_serializer_class = ProjectListSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+def create(self, request):
+    data = request.data
+    data['created_by'] = request.user
+    serializer = self.serializer_class(data)
+    if serializer.is_valid:
+        serializer.save()
+        return Response(
+            {
+            "message":_("The project was created successfully!"),
+        }, status=status.HTTP_201_CREATED,
+            )
+    return Response(
+            {
+                "message": "There are errors in the registry!",
+                "errors": serializer.errors,
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
