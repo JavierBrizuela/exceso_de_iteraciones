@@ -5,19 +5,25 @@ function Details() {
     <div className="project-wrapper">
       <div className="project-title">
         <div className="project-title-shadow">
-          <h1 className="project-title-text">Detalles del proyecto</h1>
+          <h1 className="project-title-text">Proyecto de ejemplo</h1>
         </div>
       </div>
-      <div className="project-tags-type-difficulty">
-        <span className="project-tag project-details-type">Educación</span>
-        <span className="project-tag project-details-difficulty">Principiante</span>
+      <div className="project-username-info">
+        <label>
+          <i className="created-by-user-icon"></i>
+        </label>
+        <span className="project-tag-created-by">PepitoRubio</span>
       </div>
-      <div className="project-tags-languages-status">
-        <div className="project-languages">
+      <div className="tags-wrapper">
+        <div className="project-tags-type-difficulty">
+          <span className="project-tag project-details-type">Educación</span>
+          <span className="project-tag project-details-status">En proceso</span>
+          <span className="project-tag project-details-difficulty">Principiante</span>
+        </div>
+        <div className="project-tags-languages">
           <span className="project-tag project-details-language">JavaScript</span>
           <span className="project-tag project-details-language">Python</span>
         </div>
-        <span className="project-tag project-details-status">En proceso</span>
       </div>
       <div className="description">
         <h3 className="project-info">Descripción</h3>
