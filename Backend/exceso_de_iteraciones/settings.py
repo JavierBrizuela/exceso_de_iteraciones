@@ -50,6 +50,7 @@ THIRD_APPS = [
 
 OWN_APPS = [
     'apps.accounts',
+    'apps.project',
 ]
 
 INSTALLED_APPS = BASE_APPS + THIRD_APPS + OWN_APPS
@@ -169,5 +170,6 @@ SIMPLE_JWT = {
     }
 
 #Configuración de CORS
-CORS_ORIGIN_WHITELIST = [os.getenv("CORS_ORIGIN_WHITELIST"),]
+#CORS_ORIGIN_WHITELIST = [os.getenv("CORS_ORIGIN_WHITELIST"),]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

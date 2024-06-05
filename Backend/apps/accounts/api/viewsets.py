@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveUpdateAPIView, GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import status
@@ -54,8 +54,8 @@ class ProfileView(RetrieveUpdateAPIView):
     summary='User',
     request=ChangePasswordSerializer,
 )
-class ChangePasswordView(APIView):
-
+class ChangePasswordView(GenericAPIView):
+    serializer_class = ChangePasswordSerializer
     permission_classes = [IsAuthenticated,]
     http_allowed_method = ['post']
     def post(self, request, *args, **kwargs):

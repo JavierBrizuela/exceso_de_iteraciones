@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -17,5 +17,6 @@ urlpatterns = [
     path('api/login/refresh', TokenRefreshView.as_view(), name='refresh'),
     path('api/profile-view/', ProfileView.as_view(), name='profile_view'),
     path('api/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('api/', include('apps.project.api.routers'), name='projects')
     
 ]
