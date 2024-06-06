@@ -1,0 +1,15 @@
+.imgErrorDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textError {
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Spline Sans Mono', monospace;
+    color: #002330;
+    margin-top: 40px;
+}
