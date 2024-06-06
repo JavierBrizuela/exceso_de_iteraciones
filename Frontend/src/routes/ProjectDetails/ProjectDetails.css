@@ -29,6 +29,8 @@
 
 .project-title-text {
   font-size: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .project-username-info {
@@ -263,4 +265,37 @@
   transition: all 0.6s ease;
   font-weight: bold;
   max-width: 220px;
+}
+
+.button-request-join:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background-color: var(--font-color);
+  color: var(--dark-blue);
+}
+
+@media (max-width: 500px) {
+  .project-title-shadow {
+    background: none;
+    border-radius: initial;
+    border-color: transparent;
+    border-width: initial;
+    border-style: none;
+    width: initial;
+  }
+
+  .project-tags-type-difficulty {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 775px) {
+  .project-wrapper {
+    padding: 2rem;
+  }
+
+  .project-basic-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
