@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import Input from "./components/Input";
-import "./Signup.css";
+import "./Signin.css";
 import { toast } from "react-hot-toast";
 
 function Signin() {
@@ -38,7 +38,7 @@ function Signin() {
   const password = watch("password", "");
 
   return (
-    <section className="form-signup">
+    <section className="form-signin">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="signup-titles">
           <h1>¡Bienvenid@ de nuevo!</h1>

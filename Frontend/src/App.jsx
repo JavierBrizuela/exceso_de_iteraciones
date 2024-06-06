@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Root from "./routes/Root";
 import Home from "./routes/Home";
 import Signup from "./routes/Signup/Signup";
-import Signin from "./routes/Signup/Signin";
+import Signin from "./routes/Signin/Signin";
 
 const router = createBrowserRouter([
   {
