@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import styles from "./footer.module.scss";
 import react from "react";
-import iconFacebook from "../../../../assets/icons8-facebook-50.png";
-import  iconInstagram from "../../../../assets/icons8-instagram-24.png";
-import iconTwitter from "../../../../assets/icons8-twitter-50.png";
-import iconLinkedin from  "../../../../assets/icons8-linkedin-50.png";
-import iconMail from "../../../../assets/icons8-mail-50.png";
-import iconYoutube from "../../../../assets/icons8-mail-50.png"
+import iconFacebook from "../../assets/icons8-facebook-50.png";
+import  iconInstagram from "../../assets/icons8-instagram-24.png";
+import iconTwitter from "../../assets/icons8-twitter-50.png";
+import iconLinkedin from  "../../assets/icons8-linkedin-50.png";
+import iconMail from "../../assets/icons8-mail-50.png";
+import iconYoutube from "../../assets/icons8-youtube-50.png"
 export default function Footer (){
     return (
         <div className={styles.footer}>

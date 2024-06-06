@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
 import style from "./header.module.scss"
-import logo from "../../../../assets/develmatch.png"
+import logo from "../../assets/develmatch.png"
 export default function Header() {
     return (
         <div className={style.divHeader}>
