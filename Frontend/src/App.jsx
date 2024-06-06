@@ -2,7 +2,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Root from "./routes/Root";
-import Home from "./routes/Home/Home";
+import Home from "./routes/Home";
 import Signup from "./routes/Signup/Signup";
 
 const router = createBrowserRouter([

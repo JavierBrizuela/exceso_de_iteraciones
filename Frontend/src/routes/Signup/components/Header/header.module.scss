@@ -1,0 +1,35 @@
+.divHeader {
+    width: 100%;
+    height: 95px;
+    background-color: #CFF0FC;
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgLogo{
+    width: 60px;
+    height: 55px;
+}
+
+.divLogo {
+    height: 95px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userName {
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Spline Sans Mono', monospace;
+    color: #002330;
+}
+
+.userNameDiv {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
