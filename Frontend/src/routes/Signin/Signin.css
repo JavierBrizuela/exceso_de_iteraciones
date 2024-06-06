@@ -13,35 +13,35 @@
   width: 80vh;
   display: flex;
   flex-direction: column;
-  /*justify-content: center;*/
+  justify-content: center;
   align-items: center;
   gap: 3rem;
 }
 
-.signup-titles {
+.signin-titles {
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 1rem;
+  gap: 3rem;
 }
 
-.signup-titles h1,
-.signup-titles h2 {
+.signin-titles h1,
+.signin-titles h2 {
   color: var(--font-color);
 }
 
-.signup-titles h1 {
+.signin-titles h1 {
   font-size: 2rem;
 }
 
-.signup-titles h2 {
+.signin-titles h2 {
   font-size: 1.5rem;
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3rem;
   width: 100%;
 }
 
@@ -107,21 +107,11 @@
   outline: solid var(--background-icon);
 }
 
-.name,
-.surname {
-  background-image: url(../../assets/icon-user.png);
-}
-
-.username {
-  background-image: url(../../assets/icon-username.png);
-}
-
 .email {
   background-image: url(../../assets/icon-mail.png);
 }
 
-.password,
-.password-repeat {
+.password {
   background-image: url(../../assets/icon-password.png);
 }
 
