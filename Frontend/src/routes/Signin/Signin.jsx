@@ -1,41 +1,49 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import Input from "./components/Input";
 import "./Signin.css";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function Signin() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [apiError, setApiError] = useState('');
+  const history = useHistory();
+  
 
   const onSubmit = (data) => {
     console.log(data);
-    fetch("http://127.0.0.1:8000/api/signup/", {
+    fetch("http://127.0.0.1:8000/api/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: data.email,
-        first_name: data.nombre,
-        last_name: data.apellido,
-        username: data.username,
         password: data.password,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.email?.includes("Ya existe Usuario con este email.")) {
-          toast.error("Ya existe un usuario con este email");
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((data) => {
+            throw new Error(data.detail || 'Something went wrong');
+          });
         }
+        return response.json();
+      })
+      .then((data) => {
         console.log(data);
-      });
+        // Handle successful login here
+        history.push('/user-page');
+      })
+      .catch((error) => {
+        if (error.name === 'TypeError') {
+          setApiError('Algo ha ido mal');
+        } else {
+          setApiError(error.message);
+        }})
   };
 
-  const password = watch("password", "");
 
   return (
     <section className="form-signin">
@@ -50,16 +58,12 @@ function Signin() {
             <Input
               id="email"
               registerProps={register("email", {
-                required: "El email es obligatorio",
-                pattern: {
-                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                  message: "El formato del email es incorrecto",
-                },
+                required: "El email es obligatorio" 
               })}
               type="email"
               placeholder="usuario@ejemplo.es"
               icon="email"
-              errorMessage={errors.email && errors.email.message}
+              errorMessage={errors.email?.message}
             />
           </div>
           <div className="input-group">
@@ -67,17 +71,11 @@ function Signin() {
               id="password"
               registerProps={register("password", {
                 required: "La contraseña es obligatoria",
-                minLength: { value: 8, message: "La contraseña debe tener al menos 8 caracteres" },
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]+$/,
-                  message:
-                    "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
-                },
               })}
               type="password"
               placeholder="Contraseña"
               icon="password"
-              errorMessage={errors.password && errors.password.message}
+              errorMessage={errors.password?.message || apiError}
             />
           </div>
         </div>
