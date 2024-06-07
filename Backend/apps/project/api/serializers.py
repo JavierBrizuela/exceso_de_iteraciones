@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from apps.project.models import Project
+from apps.accounts.api.serializers import UserCreateSerializer
 
 """ class UserNameRelatedField(serializers.RelatedField):
     def to_representation(self, value):
@@ -23,7 +24,7 @@ class ProjectListSerializer(serializers.ListSerializer):
         ) """
         
 class ProjectSerializer(serializers.ModelSerializer):
-    
+    created_by = UserCreateSerializer(read_only=True)
     class Meta:
         model = Project
         fields = (
