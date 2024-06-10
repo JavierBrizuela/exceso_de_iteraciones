@@ -20,6 +20,12 @@ class UserCreateSerializer(serializers.ModelSerializer):
             raise ValidationError(_('Email already exists'))
         return value
     
+    def validate_username(self, value):
+        #Check that the username is unique.
+        if get_user_model().objects.filter(username=value).exists():
+            raise ValidationError(_('Username already exists'))
+        return value
+    
     def validate_password(self, value):
         #Encrypt password
         return make_password(value)
@@ -35,6 +41,13 @@ class ProfileSerializer(serializers.ModelSerializer):
         if get_user_model().objects.filter(email=value).exists():
             if self.instance.email != value:
                 raise ValidationError(_('Email already exists'))
+        return value
+    
+    def validate_username(self, value):
+        #Check that the username is unique.
+        if get_user_model().objects.filter(username=value).exists():
+            if self.instance.username != value:
+                raise ValidationError(_('Username already exists'))
         return value
     
     def to_representation(self, instance):

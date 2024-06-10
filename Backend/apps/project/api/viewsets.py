@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 
 from .permissions import IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
 from apps.project.models import Project, Brief
-from .serializers import ProjectSerializer#, ProjectListSerializer
+from .serializers import ProjectSerializer, ProjectListSerializer, ProjectDetailSerializer
 
 @extend_schema_view(
     list = extend_schema(description='permite listar los projectos',summary='Project',responses={200:ProjectSerializer},),
@@ -23,10 +23,15 @@ from .serializers import ProjectSerializer#, ProjectListSerializer
 )
 class ProjectModelViewSet(ModelViewSet):
     queryset = Project.active_objects
-    serializer_class = ProjectSerializer
-    #list_serializer_class = ProjectListSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ProjectListSerializer
+        if self.action == 'retrieve':
+            return ProjectDetailSerializer
+        return ProjectSerializer
     
     def perform_create(self, serializer):
 
@@ -38,16 +43,13 @@ class ProjectModelViewSet(ModelViewSet):
         project = Project.objects.get_object_by_id(id)
         
         if project:
-            #if project.created_by.email == self.request.user:
+            
             project.soft_delete()
             return Response(
                 {"message":_("The project was deleted")},
                 status=status.HTTP_204_NO_CONTENT
             )
-            """ return Response(
-                    {"message":_("You are not the owner")},
-                    status=status.HTTP_401_UNAUTHORIZED
-                ) """
+            
         return Response(
                 {"message":_("The project does not exist")},
                 status=status.HTTP_404_NOT_FOUND

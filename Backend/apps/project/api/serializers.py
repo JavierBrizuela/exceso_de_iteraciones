@@ -1,15 +1,23 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from apps.project.models import Project
+from apps.project.models import Project, Brief
 from apps.accounts.api.serializers import UserCreateSerializer
-
-""" class UserNameRelatedField(serializers.RelatedField):
-    def to_representation(self, value):
-        return value.username
     
-class ProjectListSerializer(serializers.ListSerializer):
-    created_by_username = UserNameRelatedField(read_only=True)
+class BriefSerializer(serializers.ModelSerializer):
     
+    class Meta:
+        model = Brief
+        fields = (
+            'project_id',
+            'purpose',
+            'goals',
+            'audience',
+            'story',
+            'timeframe',
+        )
+    
+class ProjectListSerializer(serializers.ModelSerializer):
+    created_by_username = serializers.EmailField(source='created_by.username', read_only=True)
     class Meta:
         model = Project
         fields = (
@@ -21,7 +29,7 @@ class ProjectListSerializer(serializers.ListSerializer):
             'difficulty',
             'repository',
             'actual_status',
-        ) """
+        ) 
         
 class ProjectSerializer(serializers.ModelSerializer):
     created_by = UserCreateSerializer(read_only=True)
@@ -37,9 +45,25 @@ class ProjectSerializer(serializers.ModelSerializer):
             'repository',
             'actual_status',
         )
-        """list_serializer_class = ProjectListSerializer
-        
-         def create(self, validated_data):
-            validated_data['created_by'] = 
-            return Project.objects.create(**validated_data) """
-            
+       
+class ProjectDetailSerializer(serializers.ModelSerializer):
+    created_by = UserCreateSerializer(read_only=True)
+    brief = BriefSerializer(read_only=True)
+    #technology = 
+    #team_members =
+    
+    class Meta:
+        model = Project
+        fields = (
+            'id',
+            'created_by',
+            'title',
+            'type',
+            'description',
+            'difficulty',
+            'repository',
+            'actual_status',
+            'brief',
+            'technology',
+            'team_members',
+        )

@@ -1,6 +1,7 @@
 from django.db import models
 from apps.abstracts.models import AbstractModel
 from django.contrib.auth import get_user_model
+from apps.metadata.models import Framework
 
 # Create your models here.
 PROJECT_TYPE = [
@@ -31,6 +32,7 @@ class Project(AbstractModel):
     repository  = models.CharField(max_length=255, null=True, blank=True)
     actual_status = models.CharField(max_length=1, choices=STATUS, default='0')
     team_members = models.ManyToManyField(get_user_model(), related_name='projects')
+    technology = models.ManyToManyField(Framework, related_name='technologies')
     
     def __str__(self) -> str:
         return self.title

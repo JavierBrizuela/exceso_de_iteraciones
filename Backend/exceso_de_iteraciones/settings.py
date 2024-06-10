@@ -36,7 +36,7 @@ BASE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     # the sessions apps are not necessary because it is implemented JWT
-    #'django.contrib.sessions', 
+    'django.contrib.sessions', 
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -51,6 +51,7 @@ THIRD_APPS = [
 OWN_APPS = [
     'apps.accounts',
     'apps.project',
+    'apps.metadata',
 ]
 
 INSTALLED_APPS = BASE_APPS + THIRD_APPS + OWN_APPS
