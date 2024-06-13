@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Input from "./components/Input";
 import "./Signin.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function Signin() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [apiError, setApiError] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
   
 
   const onSubmit = (data) => {
@@ -18,6 +18,7 @@ function Signin() {
       headers: {
         "Content-Type": "application/json",
       },
+      //mode: 'no-cors',
       body: JSON.stringify({
         email: data.email,
         password: data.password,
@@ -34,7 +35,7 @@ function Signin() {
       .then((data) => {
         console.log(data);
         // Handle successful login here
-        history.push('/user-page');
+        navigate('/user-page');
       })
       .catch((error) => {
         if (error.name === 'TypeError') {
