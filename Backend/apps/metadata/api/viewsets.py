@@ -1,12 +1,15 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response 
+from rest_framework.decorators import action
 from rest_framework import status
-from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
+from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter, OpenApiTypes, OpenApiResponse
+
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import get_object_or_404
 
 from .permissions import IsModeratorOrReadOnly, IsAuthenticatedOrReadOnly
-from apps.metadata.api.serializers import LanguageSerializer, FrameworkSerializer, RoleSerializer, UserFrameworkSerializer
+from apps.metadata.api.serializers import LanguageSerializer, FrameworkSerializer, RoleSerializer, UserFrameworkSerializer, UserRoleSerializer
 from apps.metadata.models import Language, Framework, Role
 
 class LanguageViewSet(ModelViewSet):
@@ -23,56 +26,56 @@ class RoleViewSet(ModelViewSet):
     serializer_class = RoleSerializer
     queryset = Role.objects.all()
     permission_classes = [IsModeratorOrReadOnly]
-    
+
 @extend_schema_view(
-    post=extend_schema(
-        parameters=[
-            OpenApiParameter(name='framework_id', description='ID of the Framework', required=True, type=int)
-        ]
+    add_role=extend_schema(
+        summary='User-Role',
+        description=_('add a role to current user'),
+        request=UserRoleSerializer,
+        responses={
+        201: OpenApiResponse(description='Created'),
+        400: OpenApiResponse(description='Bad Request')
+    }
     ),
-    delete=extend_schema(
-        parameters=[
-            OpenApiParameter(name='framework_id', description='ID of the Framework', required=True, type=int)
-        ]
+    remove_role=extend_schema(
+        summary='User-Role',
+        description=_('remove a role to current user'),
+        parameters=[OpenApiParameter('id', OpenApiTypes.INT, OpenApiParameter.PATH, description='ID of the Role')],
+        responses={
+            204: OpenApiResponse(description='No Content'),
+            404: OpenApiResponse(description='Not Found'),
+            }
     )
 )
-class UserRoleViewSet(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+class UserRoleViewSet(ViewSet):
 
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
-    def post(self, request, role_id):
-        """
-        Add the current user to the role's users.
-        """
-        role = Role.objects.filter(id=role_id).first()
-        if role:
-            user = request.user
+    @action(detail=False, methods=['post'], url_path='add-role')
+    def add_role(self, request):
+        user = request.user
+        serializer = UserRoleSerializer(data=request.data)
+        if serializer.is_valid():
+            role = serializer.validated_data['role_id']
             role.users.add(user)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(
-            {"message":"the role_id do not exists"},
-            status=status.HTTP_400_BAD_REQUEST
-            )
-    def delete(self, request, role_id):
-        """
-        Remove the current user from the role's users.
-        """
-        role = Role.objects.get(id=role_id)
-        if role:
-            user = request.user
-            role.users.remove(user)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(
-            {"message":"the role_id do not exists"},
-            status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['delete'], url_path='remove-role')
+    def remove_role(self, request, pk=None):
+        user = request.user
+        role = get_object_or_404(Role, id=pk)
+        role.users.remove(user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @extend_schema(
-    description=_('add framework to the current user'),
-    summary='User-framework',
-    request=UserFrameworkSerializer,
-)
-class UserFrameworkViewSet(APIView):
+        request=UserFrameworkSerializer,
+        responses={
+        201: OpenApiResponse(description='Created'),
+        400: OpenApiResponse(description='Bad Request')
+    }
+    )
+class AddUserFrameworkViewSet(APIView):
    
     def post(self, request):
         user = request.user
@@ -82,12 +85,19 @@ class UserFrameworkViewSet(APIView):
             framework.users.add(user)
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@extend_schema(
+        parameters=[OpenApiParameter('framework_id', OpenApiTypes.INT, OpenApiParameter.PATH, description='ID of the Framework')],
+        responses={
+            204: OpenApiResponse(description='No Content'),
+            404: OpenApiResponse(description='Not Found'),
+            }
+    )    
+class RemoveUserFrameworkViewSet(APIView):
     
-    def delete(self, request):
+    def delete(self, request, framework_id):
         user = request.user
-        serializer = UserFrameworkSerializer(data=request.data)
-        if serializer.is_valid():
-            framework = serializer.validated_data['framework_id']
-            framework.users.remove(user)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        framework = get_object_or_404(Framework, id=framework_id)
+        framework.users.remove(user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+       

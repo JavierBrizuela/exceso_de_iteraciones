@@ -5,7 +5,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from apps.accounts.api.viewsets import Signup, ProfileView, ChangePasswordView
-from apps.metadata.api.viewsets import UserRoleViewSet, UserFrameworkViewSet
+from apps.metadata.api.viewsets import UserRoleViewSet, AddUserFrameworkViewSet, RemoveUserFrameworkViewSet
 from apps.accounts.views import Login
 
 urlpatterns = [
@@ -18,9 +18,10 @@ urlpatterns = [
     path('api/login/refresh', TokenRefreshView.as_view(), name='refresh'),
     path('api/profile-update/', ProfileView.as_view(), name='profile_view'),
     path('api/profile-update/change-password/', ChangePasswordView.as_view(), name='change_password'),
-    path('api/profile-update/user-role/', UserRoleViewSet.as_view(), name='user_role'),
-    path('api/profile-update/user-framework/', UserFrameworkViewSet.as_view(), name='user_framework'),
+    path('api/profile-update/role/', UserRoleViewSet.as_view({'post': 'add_role'}), name='add_role'),
+    path('api/profile-update/role/<int:pk>', UserRoleViewSet.as_view({'delete': 'remove_role'}), name='remove_role'),
+    path('api/profile-update/framework/', AddUserFrameworkViewSet.as_view(), name='add_user_framework'),
+    path('api/profile-update/framework/<int:framework_id>', RemoveUserFrameworkViewSet.as_view(), name='remove_user_framework'),
     path('api/', include('apps.project.api.routers'), name='projects'),
     path('api/metadata/', include('apps.metadata.api.routers'), name='metadatas'),
-    
     ]

@@ -25,6 +25,9 @@ class RoleSerializer(serializers.ModelSerializer):
             'id',
             'name',
             )
+
+class UserRoleSerializer(serializers.Serializer):
+    role_id = serializers.PrimaryKeyRelatedField(queryset=Role.objects.all())
         
 class UserFrameworkSerializer(serializers.Serializer):
     framework_id = serializers.PrimaryKeyRelatedField(queryset=Framework.objects.all())
