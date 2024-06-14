@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Card.css";
 import PropTypes from "prop-types";
 
@@ -22,7 +23,9 @@ function Card({ id, title, type, difficulty, languages, created_by, actual_statu
             <span className="tag project-actual-status">{actual_status}</span>
             <span className="tag project-created-by">{created_by}</span>
           </div>
-          <button className="card-more-info">+ Info</button>
+          <Link to={`/projects/${id}`} className="card-more-info">
+            + Info
+          </Link>
         </div>
       </div>
     </div>
