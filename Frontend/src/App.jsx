@@ -5,6 +5,7 @@ import Root from "./routes/Root";
 import Home from "./routes/Home/Home";
 import Signup from "./routes/Signup/Signup";
 import Details from "./routes/ProjectDetails/ProjectDetails";
+import Signin from "./routes/Signin/Signin";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "projectdetails",
         element: <Details />,
+      },
+      {
+        path: "signin",
+        element: <Signin />,
       },
     ],
   },
