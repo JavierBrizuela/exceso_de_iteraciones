@@ -13,30 +13,35 @@ function Details() {
     return <h1>Project not found</h1>;
   }
 
+  const { title, type, difficulty, languages, created_by, actual_status, repository } = project;
+
   return (
     <div className="project-wrapper">
       <div className="project-title">
         <div className="project-title-shadow">
-          <h1 className="project-title-text">Proyecto de ejemplo</h1>
+          <h1 className="project-title-text">{title}</h1>
         </div>
       </div>
       <div className="project-username-info">
         <label>
           <i className="created-by-user-icon"></i>
         </label>
-        <span className="project-tag-created-by">PepitoRubio</span>
+        <span className="project-tag-created-by">{created_by}</span>
       </div>
       <div className="project-basic-info-center">
         <div className="project-basic-info">
           <div className="tags-wrapper">
             <div className="project-tags-type-difficulty">
-              <span className="project-tag project-details-type">Educación</span>
-              <span className="project-tag project-details-status">En proceso</span>
-              <span className="project-tag project-details-difficulty">Principiante</span>
+              <span className="project-tag project-details-type">{type}</span>
+              <span className="project-tag project-details-status">{actual_status}</span>
+              <span className="project-tag project-details-difficulty">{difficulty}</span>
             </div>
             <div className="project-tags-languages">
-              <span className="project-tag project-details-language">JavaScript</span>
-              <span className="project-tag project-details-language">Python</span>
+              {languages.map((language) => (
+                <span key={language} className="project-tag project-details-language">
+                  {language}
+                </span>
+              ))}
             </div>
           </div>
           <span className="separator-vertical"></span>
@@ -44,7 +49,7 @@ function Details() {
             <div className="repository">
               <h3 className="project-info">Repositorio</h3>
               <div className="url-wrapper">
-                <div className="repository-text">URL DEL REPO</div>
+                <div className="repository-text">{repository}</div>
                 <label className="copy-url-icon-wrapper">
                   <i className="copy-url-icon"></i>
                 </label>

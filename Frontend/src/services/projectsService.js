@@ -7,6 +7,7 @@ const projects = [
     languages: ["JavaScript", "TypeScript"],
     created_by: "PepitoRubio",
     actual_status: "waiting",
+    repository: "https://blabla.com",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const projects = [
     languages: ["JavaScript", "TypeScript"],
     created_by: "OtroUsuario",
     actual_status: "finished",
+    repository: "https://blabla2.com",
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ const projects = [
     languages: ["JavaScript", "TypeScript"],
     created_by: "OtroUsuarioTres",
     actual_status: "in_progress",
+    repository: "https://blabla3.com",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ const projects = [
     languages: ["JavaScript", "TypeScript"],
     created_by: "OtroUsuarioCuatro",
     actual_status: "cancelled",
+    repository: "https://blabla4.com",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ const projects = [
     languages: ["JavaScript", "TypeScript"],
     created_by: "OtroUsuarioCinco",
     actual_status: "cancelled",
+    repository: "https://blabla5.com",
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ const projects = [
     languages: ["JavaScript", "TypeScript"],
     created_by: "OtroUsuarioSeis",
     actual_status: "cancelled",
+    repository: "https://blabla6.com",
   },
 ];
 
