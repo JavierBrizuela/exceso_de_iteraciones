@@ -7,6 +7,7 @@ class LanguageSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+            
             )
         
 class FrameworkSerializer(serializers.ModelSerializer):
@@ -28,6 +29,9 @@ class RoleSerializer(serializers.ModelSerializer):
 
 class UserRoleSerializer(serializers.Serializer):
     role_id = serializers.PrimaryKeyRelatedField(queryset=Role.objects.all())
+    
+class UserLanguageSerializer(serializers.Serializer):
+    language_id = serializers.PrimaryKeyRelatedField(queryset=Language.objects.all())
         
 class UserFrameworkSerializer(serializers.Serializer):
     framework_id = serializers.PrimaryKeyRelatedField(queryset=Framework.objects.all())

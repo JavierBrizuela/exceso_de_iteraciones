@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 class Language(models.Model):
     name = models.CharField(unique=True, max_length=100)
+    users = models.ManyToManyField(get_user_model(), related_name='languages')
     
     def __str__(self):
         return self.name
