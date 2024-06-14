@@ -35,7 +35,7 @@ function Signin() {
       .then((data) => {
         console.log(data);
         // Handle successful login here
-        navigate('/user-page');
+        navigate('/');
       })
       .catch((error) => {
         if (error.name === 'TypeError') {
