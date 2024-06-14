@@ -25,6 +25,10 @@ const router = createBrowserRouter([
         element: <Details />,
       },
       {
+        path: "projects/:projectId",
+        element: <Details />,
+      },
+      {
         path: "signin",
         element: <Signin />,
       },

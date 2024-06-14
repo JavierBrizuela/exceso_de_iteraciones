@@ -1,6 +1,18 @@
+import { useParams } from "react-router-dom";
 import "./ProjectDetails.css";
+import { getProject } from "../../services/projectsService";
 
 function Details() {
+  const params = useParams();
+  const projectId = parseInt(params.projectId);
+  const project = getProject(projectId);
+  console.log(project, params.projectId);
+
+  if (!project) {
+    // TODO: Redirigir a la página error 404
+    return <h1>Project not found</h1>;
+  }
+
   return (
     <div className="project-wrapper">
       <div className="project-title">
