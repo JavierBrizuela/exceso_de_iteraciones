@@ -13,7 +13,8 @@ function Details() {
     return <h1>Project not found</h1>;
   }
 
-  const { title, type, difficulty, languages, created_by, actual_status, repository } = project;
+  const { title, type, difficulty, languages, created_by, actual_status, repository, description } =
+    project;
 
   return (
     <div className="project-wrapper">
@@ -59,6 +60,7 @@ function Details() {
             <div className="project-info-members">
               <h3 className="project-info">Participantes</h3>
               <div className="project-team">
+                {/* TODO: esperar a que esté creado el campo team_member*/}
                 <span className="project-member-team">usuario1</span>
                 <span className="project-member-team">usuario2</span>
                 <span className="project-member-team">usuario3</span>
@@ -70,18 +72,7 @@ function Details() {
       <span className="separator-horizontal"></span>
       <div className="description">
         <h3 className="project-info">Descripción</h3>
-        <div className="description-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
-          tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
-          diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor,
-          orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.
-          Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.
-          Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum
-          augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui
-          ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum.
-          Maecenas adipiscing ante non diam sodales hendrerit.
-        </div>
+        <div className="description-text">{description}</div>
       </div>
       <span className="separator-horizontal"></span>
       <div className="request">
