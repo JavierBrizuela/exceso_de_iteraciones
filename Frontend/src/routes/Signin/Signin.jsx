@@ -35,6 +35,7 @@ function Signin() {
       .then((data) => {
         console.log(data);
         // Handle successful login here
+        localStorage.setItem('usuario', JSON.stringify(data));
         navigate('/');
       })
       .catch((error) => {
