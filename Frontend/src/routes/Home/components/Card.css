@@ -1,11 +1,3 @@
-:root {
-  --background-title-card: #356dca;
-  --type-tag: #4285f4;
-  --difficulty-tag: #c54141;
-  --created-tag: #636363;
-  --status-tag: #2c7d5b;
-}
-
 .card-wrapper {
   background: linear-gradient(to bottom, var(--blue), var(--green));
   min-width: 270px;
@@ -97,6 +89,7 @@
   display: flex;
   align-self: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .card-more-info:hover {
