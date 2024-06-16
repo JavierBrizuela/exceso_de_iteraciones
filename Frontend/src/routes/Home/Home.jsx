@@ -1,8 +1,12 @@
 import "./Home.css";
 import Card from "./components/Card";
 import { getProjects } from "../../services/projectsService";
+import { useContext } from "react";
+import { AccessContext } from "../../App";
 
 function Home() {
+  const context = useContext(AccessContext);
+  console.log(context.access);
   const projects = getProjects();
 
   return (

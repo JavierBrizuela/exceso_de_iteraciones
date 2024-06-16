@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Input from "./components/Input";
 import "./Signin.css";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { AccessContext } from "../../App";
 
 function Signin() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [apiError, setApiError] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
-  
+  const context = useContext(AccessContext);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -27,25 +31,26 @@ function Signin() {
       .then((response) => {
         if (!response.ok) {
           return response.json().then((data) => {
-            throw new Error(data.detail || 'Something went wrong');
+            throw new Error(data.detail || "Something went wrong");
           });
         }
         return response.json();
       })
       .then((data) => {
-        // Handle successful login here
-        localStorage.setItem('usuario', JSON.stringify(data));
-        console.log(data)
-        navigate('/');
+        localStorage.setItem("access", data.access);
+        localStorage.setItem("refresh", data.refresh);
+        console.log(data);
+        context.setAccess(data.access);
+        navigate("/");
       })
       .catch((error) => {
-        if (error.name === 'TypeError') {
-          setApiError('Algo ha ido mal');
+        if (error.name === "TypeError") {
+          setApiError("Algo ha ido mal");
         } else {
           setApiError(error.message);
-        }})
+        }
+      });
   };
-
 
   return (
     <section className="form-signin">
@@ -60,7 +65,7 @@ function Signin() {
             <Input
               id="email"
               registerProps={register("email", {
-                required: "El email es obligatorio" 
+                required: "El email es obligatorio",
               })}
               type="email"
               placeholder="usuario@ejemplo.es"
