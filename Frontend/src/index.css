@@ -13,6 +13,12 @@
   --input-font: #747474;
   --wrong-input: #f95454;
   --transparency: #a4a4a478;
+  --background-title-card: #356dca;
+  --type-tag: #4285f4;
+  --difficulty-tag: #c54141;
+  --created-tag: #636363;
+  --status-tag: #2c7d5b;
+  --language-tag: #862ad1;
 }
 
 body {

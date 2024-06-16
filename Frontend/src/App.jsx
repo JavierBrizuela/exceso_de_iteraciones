@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Root from "./routes/Root";
-import Home from "./routes/Home/Home";
+import Home from "./routes/Home";
 import Signup from "./routes/Signup/Signup";
+import ProjectIntroduction from "./routes/Project-Introduction/ProjectIntroduction";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,7 @@ function App() {
     <>
       <Toaster />
       <RouterProvider router={router} />
+      <ProjectIntroduction />
     </>
   );
 }
