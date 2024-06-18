@@ -3,6 +3,7 @@ import "./header.css";
 import logo from "../../assets/develmatch.png";
 import userImg from "../../assets/icons8-usename.png";
 import { AccessContext } from "../../App";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const { user } = useContext(AccessContext);
@@ -10,9 +11,9 @@ export default function Header() {
 
   return (
     <div className={"divHeader"}>
-      <div className={"divLogo"}>
+      <Link className={"divLogo"} to={"/"}>
         <img className={"imgLogo"} src={logo} alt="Logo Develmatch" />
-      </div>
+      </Link>
       <div className={"userNameDiv"}>
         <p className={"userName"}>{user ? user.username : " "}</p>
         <div className={"divUserNameImg"}>
