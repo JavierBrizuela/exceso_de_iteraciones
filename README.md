@@ -41,7 +41,6 @@ _**"Develmatch"** es una plataforma colaborativa donde los usuarios del rubro **
       - [👩‍💻 **Laura**](#-laura)
     - [🔙🔚 BACKEND:](#-backend-1)
       - [👨‍💻 **Javier Brizuela**](#-javier-brizuela)
-      - [👨‍💻 **Jorge Fuentes**](#-jorge-fuentes)
 
 </details>
 
@@ -217,13 +216,5 @@ $ pyenv global 3.12.3
 - Linkedin: [JavierBrizuela]()
   
 </details>
-
-#### 👨‍💻 **Jorge Fuentes**
-
-<details>
-<summary>Más información:</summary>
-  
-- GitHub: [jorge-fuentes-94](https://github.com/jorge-fuentes-94)
-- Linkedin: []()
   
 </details>
