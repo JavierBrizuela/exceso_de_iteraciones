@@ -87,7 +87,9 @@ function Details() {
       <span className="separator-horizontal"></span>
       <div className="request">
         <h3 className="request-join">¡Únete al proyecto!</h3>
-        <button className="button-request-join">Solicitar unirse</button>
+        <a href="mailto:develmatch@gmail.com">
+          <button className="button-request-join">Solicitar unirse</button>
+        </a>
       </div>
     </div>
   );
