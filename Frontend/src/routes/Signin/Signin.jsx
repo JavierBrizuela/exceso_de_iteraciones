@@ -15,41 +15,40 @@ function Signin() {
   const navigate = useNavigate();
   const context = useContext(AccessContext);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    fetch("http://127.0.0.1:8000/api/login/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      //mode: 'no-cors',
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((data) => {
-            throw new Error(data.detail || "Something went wrong");
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        localStorage.setItem("access", data.access);
-        localStorage.setItem("refresh", data.refresh);
-        console.log(data);
-        context.setAccess(data.access);
-        navigate("/");
-      })
-      .catch((error) => {
-        if (error.name === "TypeError") {
-          setApiError("Algo ha ido mal");
-        } else {
-          setApiError(error.message);
-        }
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      const response = await fetch("http://127.0.0.1:8000/api/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        //mode: 'no-cors',
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Something went wrong");
+      }
+
+      const responseData = await response.json();
+      localStorage.setItem("access", responseData.access);
+      localStorage.setItem("refresh", responseData.refresh);
+      console.log(data);
+      context.setAccess(responseData.access);
+
+      navigate("/");
+    } catch (error) {
+      if (error.name === "TypeError") {
+        setApiError("Algo ha ido mal");
+      } else {
+        setApiError(error.message);
+      }
+    }
   };
 
   return (
