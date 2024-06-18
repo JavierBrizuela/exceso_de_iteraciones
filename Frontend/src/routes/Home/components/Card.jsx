@@ -33,7 +33,7 @@ function Card({ id, title, type, difficulty, languages, created_by, actual_statu
 }
 
 Card.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   difficulty: PropTypes.string.isRequired,
