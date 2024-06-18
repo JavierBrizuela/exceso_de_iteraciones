@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState, useContext } from "react";
 import Input from "./components/Input";
 import "./Signin.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AccessContext } from "../../App";
 
 function Signin() {
@@ -89,6 +89,17 @@ function Signin() {
         <button type="submit" className="register">
           Entrar
         </button>
+
+        <div className="signin-wrapper">
+          <div className="signin-text-wrapper">
+            <span className="line-sign left-line-sign"></span>
+            <p className="signin-text">O si aún no tienes cuenta</p>
+            <span className="line-sign right-line-sign"></span>
+          </div>
+          <Link className="account-signin-button" to={"/signup"}>
+            Crea tu cuenta gratis
+          </Link>
+        </div>
       </form>
     </section>
   );

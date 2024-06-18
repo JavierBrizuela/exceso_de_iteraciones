@@ -1,5 +1,5 @@
 .form-signin {
-  height: 40rem;
+  min-height: 40rem;
   padding: 3rem;
   display: flex;
   justify-content: center;
@@ -137,6 +137,59 @@
   transform: scale(1.05);
   background-color: var(--font-color);
   color: var(--dark-blue);
+}
+
+.signin-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.left-line-sign {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--font-color) 30%);
+}
+
+.signin-text-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.right-line-sign {
+  background: linear-gradient(to right, var(--font-color) 70%, rgba(255, 255, 255, 0));
+}
+
+.line-sign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2px;
+  width: 100%;
+}
+
+.signin-text {
+  color: var(--font-color);
+  width: 100%;
+}
+
+.account-signin-button {
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  color: var(--dark-blue);
+  background-color: var(--font-color);
+  font-weight: bold;
+  width: 13rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 @media (max-width: 470px) {
