@@ -1,7 +1,7 @@
 const projects = [
   {
     id: 1,
-    title: "uno",
+    title: "Proyecto uno",
     type: "educacion",
     difficulty: "beginner",
     languages: ["JavaScript", "TypeScript"],
@@ -14,7 +14,7 @@ const projects = [
   },
   {
     id: 2,
-    title: "dos",
+    title: "Proyecto dos",
     type: "finanza",
     difficulty: "intermediate",
     languages: ["JavaScript", "TypeScript"],
@@ -27,7 +27,7 @@ const projects = [
   },
   {
     id: 3,
-    title: "tres",
+    title: "Proyecto tres",
     type: "e_commerce",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
@@ -40,7 +40,7 @@ const projects = [
   },
   {
     id: 4,
-    title: "cuatro",
+    title: "Proyecto cuatro",
     type: "machine_learning",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
@@ -53,7 +53,7 @@ const projects = [
   },
   {
     id: 5,
-    title: "cinco",
+    title: "Proyecto cinco",
     type: "otros",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
@@ -66,7 +66,7 @@ const projects = [
   },
   {
     id: 6,
-    title: "seis",
+    title: "Proyecto seis",
     type: "otros",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
