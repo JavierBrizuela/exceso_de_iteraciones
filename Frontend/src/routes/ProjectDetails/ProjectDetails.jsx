@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import "./ProjectDetails.css";
 import { getProject } from "../../services/projectsService";
+import { toast } from "react-hot-toast";
 
 function Details() {
   const params = useParams();
@@ -23,6 +24,17 @@ function Details() {
     description,
     members,
   } = project;
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        toast.success("¡Repositorio copiado en tu clipboard!");
+      },
+      () => {
+        toast.error("El repositorio no ha podido copiarse :(");
+      },
+    );
+  };
 
   return (
     <div className="project-wrapper">
@@ -59,7 +71,9 @@ function Details() {
               <h3 className="project-info">Repositorio</h3>
               <div className="url-wrapper">
                 <div className="repository-text">{repository}</div>
-                <label className="copy-url-icon-wrapper">
+                <label
+                  className="copy-url-icon-wrapper"
+                  onClick={() => copyToClipboard(repository)}>
                   <i className="copy-url-icon"></i>
                 </label>
               </div>
