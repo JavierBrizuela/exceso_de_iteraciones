@@ -1,50 +1,59 @@
-/* eslint-disable prettier/prettier */
-import './PorjectIntroduction.css';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import "./ProjectIntroduction.css";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ProjectIntroduction() {
   const [formData, setFormData] = useState({
-    title: '',
-    rolUser: '',
-    type: '',
-    difficulty: '',
+    title: "",
+    rolUser: "",
+    type: "",
+    difficulty: "",
     languages: [],
-    description: '',
-    repository: '',
-    participants: [{ nombre: '' }]
+    description: "",
+    repository: "",
+    participants: [{ nombre: "" }],
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const languagesList = [
-    'JavaScript', 'Python', 'C', 'C++', 'Java', 'C#', 'SQL', 'Go', 
-    'PHP', 'Visual Basic', 'Fortran', 'Otros'
+    "JavaScript",
+    "Python",
+    "C",
+    "C++",
+    "Java",
+    "C#",
+    "SQL",
+    "Go",
+    "PHP",
+    "Visual Basic",
+    "Fortran",
+    "Otros",
   ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (name.includes('-')) {
-      const [field, index] = name.split('-');
+    if (name.includes("-")) {
+      const [field, index] = name.split("-");
       const newParticipants = formData.participants.map((participant, i) =>
-        i === parseInt(index) ? { ...participant, [field]: value } : participant
+        i === parseInt(index) ? { ...participant, [field]: value } : participant,
       );
       setFormData({
         ...formData,
-        participants: newParticipants
+        participants: newParticipants,
       });
-    } else if (name === 'languages') {
+    } else if (name === "languages") {
       const newLanguages = checked
         ? [...formData.languages, value]
-        : formData.languages.filter(lang => lang !== value);
+        : formData.languages.filter((lang) => lang !== value);
 
       setFormData({
         ...formData,
-        languages: newLanguages
+        languages: newLanguages,
       });
     } else {
       setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
       });
     }
   };
@@ -52,42 +61,42 @@ export default function ProjectIntroduction() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.languages.length === 0) {
-      setError('Debes seleccionar al menos un lenguaje.');
-      toast.error('Debes seleccionar al menos un lenguaje.');
+      setError("Debes seleccionar al menos un lenguaje.");
+      toast.error("Debes seleccionar al menos un lenguaje.");
     } else {
-      setError('');
-      toast.success('Formulario enviado correctamente');
+      setError("");
+      toast.success("Formulario enviado correctamente");
       // Aquí puedes manejar el envío del formulario (por ejemplo, enviar los datos a una API)
-      console.log('Datos del formulario:', formData);
+      console.log("Datos del formulario:", formData);
     }
   };
 
   const optionsDifficulty = [
-    { value: '', label: 'Selecciona una opción' },
-    { value: 'principiante', label: 'Principiante' },
-    { value: 'intermedio', label: 'Intermedio' },
-    { value: 'avanzado', label: 'Avanzado' }
+    { value: "", label: "Selecciona una opción" },
+    { value: "principiante", label: "Principiante" },
+    { value: "intermedio", label: "Intermedio" },
+    { value: "avanzado", label: "Avanzado" },
   ];
 
   const optionsType = [
-    { value: '', label: 'Selecciona una opción' },
-    { value: 'educacion', label: 'Educación' },
-    { value: 'e_commerce', label: 'E-commerce' },
-    { value: 'machine_learning', label: 'Machine learning' },
-    { value: 'otros_tipos', label: 'Otros tipos' },
+    { value: "", label: "Selecciona una opción" },
+    { value: "educacion", label: "Educación" },
+    { value: "e_commerce", label: "E-commerce" },
+    { value: "machine_learning", label: "Machine learning" },
+    { value: "otros_tipos", label: "Otros tipos" },
   ];
 
   const agregarUsuario = () => {
     setFormData({
       ...formData,
-      participants: [...formData.participants, { nombre: '' }]
+      participants: [...formData.participants, { nombre: "" }],
     });
   };
 
   const eliminarUsuario = (index) => {
     setFormData({
       ...formData,
-      participants: formData.participants.filter((_, i) => i !== index)
+      participants: formData.participants.filter((_, i) => i !== index),
     });
   };
 
@@ -108,7 +117,7 @@ export default function ProjectIntroduction() {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            required 
+            required
           />
         </div>
         <div className="project-username-info">
@@ -120,7 +129,7 @@ export default function ProjectIntroduction() {
             name="rolUser"
             value={formData.rolUser}
             onChange={handleChange}
-            required 
+            required
           />
         </div>
         <div className="project-basic-info-center">
@@ -137,7 +146,7 @@ export default function ProjectIntroduction() {
                     name="repository"
                     value={formData.repository}
                     onChange={handleChange}
-                    required 
+                    required
                   />
                 </div>
               </div>
@@ -149,8 +158,7 @@ export default function ProjectIntroduction() {
                   name="difficulty"
                   value={formData.difficulty}
                   onChange={handleChange}
-                  required 
-                >
+                  required>
                   {optionsDifficulty.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -166,8 +174,7 @@ export default function ProjectIntroduction() {
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
-                  required 
-                >
+                  required>
                   {optionsType.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -179,12 +186,12 @@ export default function ProjectIntroduction() {
                 <h3>Lenguajes:</h3>
                 {languagesList.map((lang, index) => (
                   <div key={index}>
-                    <input 
-                      type="checkbox" 
-                      name="languages" 
-                      value={lang} 
-                      checked={formData.languages.includes(lang)} 
-                      onChange={handleChange}  
+                    <input
+                      type="checkbox"
+                      name="languages"
+                      value={lang}
+                      checked={formData.languages.includes(lang)}
+                      onChange={handleChange}
                     />
                     {lang}
                   </div>
@@ -206,9 +213,12 @@ export default function ProjectIntroduction() {
                         name={`nombre-${index}`}
                         value={participant.nombre}
                         onChange={handleChange}
-                        required 
+                        required
                       />
-                      <button type="button" onClick={() => eliminarUsuario(index)} className="button-request-join">
+                      <button
+                        type="button"
+                        onClick={() => eliminarUsuario(index)}
+                        className="button-request-join">
                         X
                       </button>
                     </div>
@@ -224,10 +234,12 @@ export default function ProjectIntroduction() {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  required 
+                  required
                 />
               </div>
-              <button type="submit" className="button-request-join">Crear Proyecto</button>
+              <button type="submit" className="button-request-join">
+                Crear Proyecto
+              </button>
             </div>
           </div>
         </div>
@@ -235,7 +247,6 @@ export default function ProjectIntroduction() {
     </div>
   );
 }
-
 
 /* eslint-disable prettier/prettier */
 /*import './PorjectIntroduction.css';
