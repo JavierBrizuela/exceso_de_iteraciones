@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Input from "./components/Input";
 import "./Signup.css";
 import { toast } from "react-hot-toast";
@@ -10,6 +11,8 @@ function Signup() {
     formState: { errors },
     watch,
   } = useForm();
+
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -30,6 +33,9 @@ function Signup() {
       .then((data) => {
         if (data.email?.includes("Ya existe Usuario con este email.")) {
           toast.error("Ya existe un usuario con este email");
+        } else {
+          toast.success("¡Registro exitoso! Ahora inicia tu sesión");
+          navigate("/signin");
         }
         console.log(data);
       });
