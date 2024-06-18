@@ -3,6 +3,7 @@ import Card from "./components/Card";
 import { getProjects } from "../../services/projectsService";
 import { useContext } from "react";
 import { AccessContext } from "../../App";
+import { Link } from "react-router-dom";
 
 function Home() {
   const context = useContext(AccessContext);
@@ -36,7 +37,9 @@ function Home() {
           </div>
           <p className="account-home-secondary-text">¡Únete a la comunidad Develmatch!</p>
         </div>
-        <button className="account-home-button">Crea tu cuenta gratis</button>
+        <Link className="account-home-button" to={"/signup"}>
+          Crea tu cuenta gratis
+        </Link>
       </div>
     </section>
   );
