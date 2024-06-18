@@ -1,0 +1,27 @@
+:root {
+  --blue: #01afee;
+  --green: #70d468;
+  --pistachio: #4cc894;
+  --dark-blue: #002330;
+  --dark-green: #2b5128;
+  --dark-pistachio: #153829;
+  --light-blue: #cff0fc;
+  --light-green: #e2f6e1;
+  --light-pistachio: #dbf4ea;
+  --font-color: white;
+  --background-icon: #4285f4;
+  --input-font: #747474;
+  --wrong-input: #f95454;
+  --transparency: #a4a4a478;
+  --background-title-card: #356dca;
+  --type-tag: #4285f4;
+  --difficulty-tag: #c54141;
+  --created-tag: #636363;
+  --status-tag: #2c7d5b;
+  --language-tag: #862ad1;
+}
+
+body {
+  font-family: "Spline Sans Mono", monospace;
+  background-color: var(--light-pistachio);
+}

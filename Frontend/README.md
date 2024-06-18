@@ -1,8 +1,32 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## NVM (recommended for ensuring Node version):
 
-Currently, two official plugins are available:
+```sh
+ nvm use
+ # o
+ nvm use <version>
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> [!TIP] NVM:
+> [Official Documentation](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+
+---
+
+## Instalación
+
+1. Clonar el repositorio desde tu terminal
+
+   ```sh
+   git clone https://github.com/JavierBrizuela/exceso_de_iteraciones.git
+   ```
+
+2. Crear y activar el entorno virtual
+
+- Instalar NPM packages
+
+  ```sh
+  npm install
+  ```
+
+- Correr el proyecto presionando F5 en VS Code
