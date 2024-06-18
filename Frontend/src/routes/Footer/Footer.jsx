@@ -5,6 +5,7 @@ import iconTwitter from "../../assets/icons8-twitter-50.png";
 import iconLinkedin from "../../assets/icons8-linkedin-50.png";
 import iconMail from "../../assets/icons8-mail-50.png";
 import iconYoutube from "../../assets/icons8-youtube-50.png";
+import logo from "../../assets/develmatch.png";
 
 function Footer() {
   return (
@@ -22,7 +23,7 @@ function Footer() {
         <div className={`${"line"} ${"rightLine"}`}></div>
       </div>
       <div className={"politicalInfo"}>
-        <img />
+        <img className={"imgLogoFooter"} src={logo} alt="Logo Develmatch" />
         <p className={"copyright"}>Copyright© 2024 Develmatch</p>
         <a href="https://opensource.org/licenses/MIT">
           <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" />
