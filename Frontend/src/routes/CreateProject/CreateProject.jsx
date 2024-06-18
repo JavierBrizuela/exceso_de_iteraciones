@@ -101,17 +101,17 @@ function CreateProject() {
   };
 
   return (
-    <div className="project-wrapper">
-      <div className="project-title">
-        <div className="project-title-shadow">
-          <h1 className="project-title-text">Nuevo proyecto</h1>
+    <div className="new-project-wrapper">
+      <div className="new-project-title">
+        <div className="new-project-title-shadow">
+          <h1 className="new-project-title-text">Nuevo proyecto</h1>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="project-username-info">
-          <label className="project-info">Nombre del proyecto</label>
+      <form className="new-form" onSubmit={handleSubmit}>
+        <div className="new-project-username-info">
+          <label className="new-project-info">Nombre del proyecto</label>
           <input
-            className="project-tag-created-by"
+            className="new-project-tag-created-by"
             type="text"
             id="title"
             name="title"
@@ -120,10 +120,10 @@ function CreateProject() {
             required
           />
         </div>
-        <div className="project-username-info">
-          <label className="project-info">Tu rol</label>
+        <div className="new-project-username-info">
+          <label className="new-project-info">Tu rol</label>
           <input
-            className="project-tag-created-by"
+            className="new-project-tag-created-by"
             type="text"
             id="rolUser"
             name="rolUser"
@@ -132,15 +132,15 @@ function CreateProject() {
             required
           />
         </div>
-        <div className="project-basic-info-center">
-          <div className="project-basic-info">
-            <span className="separator-vertical"></span>
-            <div className="project-repo-members">
-              <div className="repository">
-                <h3 className="project-info">Repositorio</h3>
-                <div className="url-wrapper">
+        <div className="new-project-basic-info-center">
+          <span className="new-separator-horizontal"></span>
+          <div className="new-project-basic-info">
+            <div className="new-project-repo-members">
+              <div className="new-input">
+                <h3 className="new-project-info">Repositorio</h3>
+                <div className="new-url-wrapper">
                   <input
-                    className="project-member-team"
+                    className="new-project-member-team"
                     type="text"
                     id="repository"
                     name="repository"
@@ -150,10 +150,10 @@ function CreateProject() {
                   />
                 </div>
               </div>
-              <div>
-                <h3 className="project-info">Dificultad</h3>
+              <div className="new-input">
+                <h3 className="new-project-info">Dificultad</h3>
                 <select
-                  className="desplegable-select"
+                  className="new-desplegable-select"
                   id="difficulty"
                   name="difficulty"
                   value={formData.difficulty}
@@ -166,10 +166,10 @@ function CreateProject() {
                   ))}
                 </select>
               </div>
-              <div>
-                <h3 className="project-info">Tipo de proyecto</h3>
+              <div className="new-input">
+                <h3 className="new-project-info">Tipo de proyecto</h3>
                 <select
-                  className="desplegable-select"
+                  className="new-desplegable-select"
                   id="type"
                   name="type"
                   value={formData.type}
@@ -182,7 +182,7 @@ function CreateProject() {
                   ))}
                 </select>
               </div>
-              <div>
+              <div className="new-input">
                 <h3>Lenguajes:</h3>
                 {languagesList.map((lang, index) => (
                   <div key={index}>
@@ -197,17 +197,20 @@ function CreateProject() {
                   </div>
                 ))}
               </div>
-              <span className="separator-horizontal"></span>
-              <div className="project-info-members">
-                <div className="project-team">
-                  <h3 className="project-info">Participantes</h3>
-                  <button type="button" onClick={agregarUsuario} className="button-request-join">
+              <span className="new-separator-horizontal"></span>
+              <div className="new-project-info-members">
+                <div className="new-input">
+                  <h3 className="new-project-info">Participantes</h3>
+                  <button
+                    type="button"
+                    onClick={agregarUsuario}
+                    className="new-button-request-join new-add">
                     +
                   </button>
                   {formData.participants.map((participant, index) => (
-                    <div key={index} className="new-participant">
+                    <div key={index} className="new-new-participant">
                       <input
-                        className="project-member-team"
+                        className="new-project-member-team"
                         type="text"
                         id={`user${index}`}
                         name={`nombre-${index}`}
@@ -218,17 +221,17 @@ function CreateProject() {
                       <button
                         type="button"
                         onClick={() => eliminarUsuario(index)}
-                        className="button-request-join">
+                        className="new-button-request-join">
                         X
                       </button>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="proyectDescription">
-                <h3 className="project-info">Descripción</h3>
+              <div className="new-input">
+                <h3 className="new-project-info">Descripción</h3>
                 <textarea
-                  className="description-text"
+                  className="new-description-text"
                   type="text"
                   id="description"
                   name="description"
@@ -237,7 +240,7 @@ function CreateProject() {
                   required
                 />
               </div>
-              <button type="submit" className="button-request-join">
+              <button type="submit" className="new-button-request-join">
                 Crear Proyecto
               </button>
             </div>
