@@ -1,0 +1,18 @@
+.imgErrorDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.textError {
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Spline Sans Mono", monospace;
+  color: var(--dark-blue);
+}

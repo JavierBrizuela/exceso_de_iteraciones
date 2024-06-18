@@ -7,6 +7,7 @@ import Signup from "./routes/Signup/Signup";
 import Details from "./routes/ProjectDetails/ProjectDetails";
 import Signin from "./routes/Signin/Signin";
 import { createContext, useState, useEffect } from "react";
+import Error404 from "./routes/Error404/Error404";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "signin",
         element: <Signin />,
+      },
+      {
+        path: "*",
+        element: <Error404 />,
       },
     ],
   },
