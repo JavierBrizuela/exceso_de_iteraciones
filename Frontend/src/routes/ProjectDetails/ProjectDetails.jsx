@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "./ProjectDetails.css";
 import { getProject } from "../../services/projectsService";
 
@@ -9,8 +9,7 @@ function Details() {
   console.log(project, params.projectId);
 
   if (!project) {
-    // TODO: Redirigir a la página error 404
-    return <h1>Project not found</h1>;
+    return <Link to="/*" />;
   }
 
   const {
