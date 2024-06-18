@@ -13,8 +13,17 @@ function Details() {
     return <h1>Project not found</h1>;
   }
 
-  const { title, type, difficulty, languages, created_by, actual_status, repository, description } =
-    project;
+  const {
+    title,
+    type,
+    difficulty,
+    languages,
+    created_by,
+    actual_status,
+    repository,
+    description,
+    members,
+  } = project;
 
   return (
     <div className="project-wrapper">
@@ -60,10 +69,11 @@ function Details() {
             <div className="project-info-members">
               <h3 className="project-info">Participantes</h3>
               <div className="project-team">
-                {/* TODO: esperar a que esté creado el campo team_member*/}
-                <span className="project-member-team">usuario1</span>
-                <span className="project-member-team">usuario2</span>
-                <span className="project-member-team">usuario3</span>
+                {members.map((member) => (
+                  <span key={member} className="project-member-team">
+                    {member}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
