@@ -6,7 +6,7 @@ from django import forms
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from apps.metadata.api.serializers import UserRoleSerializer, UserLanguageSerializer, UserFrameworkSerializer, RoleSerializer
+from apps.metadata.api.serializers import RoleSerializer, LanguageSerializer, FrameworkSerializer
 from apps.metadata.models import Role, Language, Framework
 
 class UserCreateSerializer(serializers.ModelSerializer):
@@ -32,10 +32,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return make_password(value)
 
 class ProfileSerializer(serializers.ModelSerializer):
-    roles = serializers.SerializerMethodField()
-    #languages = UserLanguageSerializer(many=True, read_only=True)
-    #frameworks = UserFrameworkSerializer(many=True, read_only=True)
-    frameworks = serializers.CharField(source='get_model_user().frameworks', read_only=True)
+    
+    roles = RoleSerializer(many=True, read_only=True)
+    languages = LanguageSerializer(many=True, read_only=True)
+    frameworks = FrameworkSerializer(many=True, read_only=True)
+    
     class Meta:
         model = get_user_model()
         fields = ('email', 'first_name', 'last_name', 'username', 'photo', 'roles', 'languages', 'frameworks')
@@ -67,18 +68,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             representation['permissions'] = 'user'
             
         return representation
-        
-    def get_roles(self, obj):
-        roles = Role.objects.filter(users=obj).distinct()
-        return RoleSerializer(roles, many=True).data
-    
-    """ def get_languages(self, obj):
-        languages = Role.objects.filter(users=obj).distinct()
-        return LanguageSerializer(languages, many=True).data """
-    
-    def get_framworks(self, obj):
-        framworks = Role.objects.filter(users=obj).distinct()
-        return UserFrameworkSerializer(framworks, many=True).data
     
 class TokenObtainSerilizer(TokenObtainPairSerializer):
     def validate(self, attrs):

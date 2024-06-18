@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 from apps.accounts.api.viewsets import Signup, ProfileView, ChangePasswordView
 from apps.metadata.api.viewsets import UserRoleViewSet, UserLanguageViewSet, UserFrameworkViewSet
+from apps.project.api.viewsets import UserProjectViewSet, BriefViewSets, FrameworkProjectViewSet
 from apps.accounts.views import Login
 
 urlpatterns = [
@@ -25,5 +26,10 @@ urlpatterns = [
     path('api/profile-update/framework/', UserFrameworkViewSet.as_view({'post': 'add_framework'}), name='add_framework'),
     path('api/profile-update/framework/<int:framework_id>', UserFrameworkViewSet.as_view({'delete': 'remove_framework'}), name='remove_framework'),
     path('api/', include('apps.project.api.routers'), name='projects'),
+    path('api/projects/<str:pk>/brief/', BriefViewSets.as_view(), name='briefs'),
+    path('api/projects/<str:pk>/member/', UserProjectViewSet.as_view({'post':'add_user'}), name='add_user'),
+    path('api/projects/<str:pk>/member/<str:email>', UserProjectViewSet.as_view({'delete':'remove_user'}), name='remove_user'),
+    path('api/projects/<str:pk>/technology/<int:framework_pk>', FrameworkProjectViewSet.as_view({'post':'add_framework'}), name='add_framework'),
+    path('api/projects/<str:pk>/technology/<int:framework_pk>', FrameworkProjectViewSet.as_view({'delete':'remove_framework'}), name='remove_framework'),
     path('api/metadata/', include('apps.metadata.api.routers'), name='metadatas'),
     ]

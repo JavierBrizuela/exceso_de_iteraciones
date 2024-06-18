@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from apps.project.models import Project, Brief
 from apps.accounts.api.serializers import UserCreateSerializer
+from apps.metadata.api.serializers import FrameworkSerializer
     
 class BriefSerializer(serializers.ModelSerializer):
     
@@ -17,7 +18,8 @@ class BriefSerializer(serializers.ModelSerializer):
         )
     
 class ProjectListSerializer(serializers.ModelSerializer):
-    created_by_username = serializers.EmailField(source='created_by.username', read_only=True)
+    created_by_username = serializers.EmailField(source='created_by.username', read_only=True)     
+    
     class Meta:
         model = Project
         fields = (
@@ -33,6 +35,12 @@ class ProjectListSerializer(serializers.ModelSerializer):
         
 class ProjectSerializer(serializers.ModelSerializer):
     created_by = UserCreateSerializer(read_only=True)
+    
+    def create(self, validate_data):
+        project = Project.objects.create(**validate_data)
+        brief = Brief.objects.create(project_id=project)
+        return project
+        
     class Meta:
         model = Project
         fields = (
@@ -49,8 +57,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ProjectDetailSerializer(serializers.ModelSerializer):
     created_by = UserCreateSerializer(read_only=True)
     brief = BriefSerializer(read_only=True)
-    #technology = 
-    #team_members =
+    technology = FrameworkSerializer(many=True, read_only=True)
+    team_members = UserCreateSerializer(many=True, read_only=True)
     
     class Meta:
         model = Project
