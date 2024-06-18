@@ -6,7 +6,8 @@ from django import forms
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-
+from apps.metadata.api.serializers import RoleSerializer, LanguageSerializer, FrameworkSerializer
+from apps.metadata.models import Role, Language, Framework
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,21 +21,38 @@ class UserCreateSerializer(serializers.ModelSerializer):
             raise ValidationError(_('Email already exists'))
         return value
     
+    def validate_username(self, value):
+        #Check that the username is unique.
+        if get_user_model().objects.filter(username=value).exists():
+            raise ValidationError(_('Username already exists'))
+        return value
+    
     def validate_password(self, value):
         #Encrypt password
         return make_password(value)
 
 class ProfileSerializer(serializers.ModelSerializer):
     
+    roles = RoleSerializer(many=True, read_only=True)
+    languages = LanguageSerializer(many=True, read_only=True)
+    frameworks = FrameworkSerializer(many=True, read_only=True)
+    
     class Meta:
         model = get_user_model()
-        fields = ('email', 'first_name', 'last_name', 'username', 'photo')
+        fields = ('email', 'first_name', 'last_name', 'username', 'photo', 'roles', 'languages', 'frameworks')
         
     def validate_email(self, value):
         
         if get_user_model().objects.filter(email=value).exists():
             if self.instance.email != value:
                 raise ValidationError(_('Email already exists'))
+        return value
+    
+    def validate_username(self, value):
+        #Check that the username is unique.
+        if get_user_model().objects.filter(username=value).exists():
+            if self.instance.username != value:
+                raise ValidationError(_('Username already exists'))
         return value
     
     def to_representation(self, instance):
@@ -50,7 +68,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             representation['permissions'] = 'user'
             
         return representation
-        
+    
 class TokenObtainSerilizer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
