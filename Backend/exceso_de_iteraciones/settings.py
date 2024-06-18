@@ -36,7 +36,7 @@ BASE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     # the sessions apps are not necessary because it is implemented JWT
-    #'django.contrib.sessions', 
+    'django.contrib.sessions', 
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -50,6 +50,8 @@ THIRD_APPS = [
 
 OWN_APPS = [
     'apps.accounts',
+    'apps.project',
+    'apps.metadata',
 ]
 
 INSTALLED_APPS = BASE_APPS + THIRD_APPS + OWN_APPS
@@ -151,6 +153,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    
 }
 
 #Espectacular Schema setting
@@ -164,10 +167,11 @@ SPECTACULAR_SETTINGS = {
 
 #Simple JWT setting
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     }
 
 #Configuración de CORS
-CORS_ORIGIN_WHITELIST = [os.getenv("CORS_ORIGIN_WHITELIST"),]
+#CORS_ORIGIN_WHITELIST = [os.getenv("CORS_ORIGIN_WHITELIST"),]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

@@ -1,0 +1,91 @@
+.projects-home {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.projects {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 2rem;
+}
+
+.projects-title {
+  font-size: 2rem;
+  color: var(--dark-blue);
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.create-account-home {
+  background-color: var(--dark-blue);
+  padding: 3.5rem;
+  color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  text-align: center;
+}
+
+.account-home-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.account-home-principal-text {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.account-home-principal-text h2 {
+  line-height: 1.5;
+}
+
+.account-home-secondary-text {
+  font-size: 1.5rem;
+}
+
+.account-home-button {
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  color: var(--dark-blue);
+  background-color: var(--font-color);
+  transition: all 0.6s ease;
+  font-weight: bold;
+  width: 13rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.account-home-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background: linear-gradient(to bottom, var(--blue), var(--green));
+  box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.548);
+}
+
+@media (max-width: 785px) {
+  .account-home-principal-text {
+    flex-direction: column;
+    font-size: 1rem;
+  }
+
+  .account-home-secondary-text {
+    font-size: 1rem;
+  }
+}

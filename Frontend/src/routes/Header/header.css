@@ -1,0 +1,70 @@
+.divHeader {
+  background-color: var(--light-blue);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.divLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgLogo {
+  width: 60px;
+  height: 55px;
+}
+
+.userNameDiv {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.userName {
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Spline Sans Mono", monospace;
+  color: #002330;
+}
+
+.divUserNameImg {
+  background-color: #d9d9d9;
+  border-radius: 5rem;
+}
+
+.userNameImg {
+  width: 50px;
+  height: 50px;
+  padding: 0.3rem;
+}
+
+.logButton {
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  color: var(--font-color);
+  background-color: var(--dark-blue);
+  transition: all 0.6s ease;
+  font-weight: bold;
+  width: 6rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .divHeader {
+    flex-direction: column;
+  }
+}

@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Error404 from "./Error404/Error404";
+import Footer from "./Footer/Footer";
+import Header from "./Header/Header";
 
 function Root() {
   return (
     <main>
-      {/*<h1>Hello world!</h1>
-    <Outlet />  */} 
-      <Error404 />
+      <Header />
+      <Outlet />
+      <Footer />
     </main>
   );
 }
