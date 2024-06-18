@@ -6,9 +6,10 @@ import Home from "./routes/Home/Home";
 import Signup from "./routes/Signup/Signup";
 import Details from "./routes/ProjectDetails/ProjectDetails";
 import Signin from "./routes/Signin/Signin";
+import CreateProject from "./routes/CreateProject/CreateProject";
 import { createContext, useState, useEffect } from "react";
 import Error404 from "./routes/Error404/Error404";
-import ProjectIntroduction from "./routes/Project-Introduction/ProjectIntroduction";
+import ProjectIntroduction from "./routes/CreateProject/CreateProject";
 
 const router = createBrowserRouter([
   {
@@ -24,16 +25,20 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "signin",
+        element: <Signin />,
+      },
+      {
+        path: "createproject",
+        element: <CreateProject />,
+      },
+      {
         path: "projectdetails",
         element: <Details />,
       },
       {
         path: "projects/:projectId",
         element: <Details />,
-      },
-      {
-        path: "signin",
-        element: <Signin />,
       },
       {
         path: "*",
@@ -82,7 +87,6 @@ function App() {
       <AccessContext.Provider value={{ access, setAccess, user, setUser }}>
         <Toaster />
         <RouterProvider router={router} />
-        <ProjectIntroduction />
       </AccessContext.Provider>
     </>
   );
