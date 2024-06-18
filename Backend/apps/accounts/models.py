@@ -29,7 +29,7 @@ class CustomUser(AbstractModel, AbstractBaseUser):
     email = models.EmailField(unique=True, null=False, blank=False)
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=True, blank=True)
-    username = models.CharField(max_length=50, null=True, blank=True)
+    username = models.CharField(unique=True, max_length=50)
     photo = models.CharField(max_length=255, null=True, blank=True)
     is_active  = models.BooleanField(default=True)
     is_colaborator = models.BooleanField(default=False)
