@@ -11,7 +11,7 @@ function Footer() {
   return (
     <div className={"footer"}>
       <div className={"socialMedia"}>
-        <div className={`${"line"} ${"leftLine"}`}></div>
+        <span className={`${"line"} ${"leftLine"}`}></span>
         <div className={"socialMediaLogos"}>
           <img src={iconFacebook} alt="Icono Facebook" className={"imgIcon"} />
           <img src={iconInstagram} alt="Icono Instagram" className={"imgIcon"} />
@@ -20,7 +20,7 @@ function Footer() {
           <img src={iconMail} alt="Icono Mail" className={"imgIcon"} />
           <img src={iconYoutube} alt="Icono YouTube" className={"imgIcon"} />
         </div>
-        <div className={`${"line"} ${"rightLine"}`}></div>
+        <span className={`${"line"} ${"rightLine"}`}></span>
       </div>
       <div className={"politicalInfo"}>
         <img className={"imgLogoFooter"} src={logo} alt="Logo Develmatch" />

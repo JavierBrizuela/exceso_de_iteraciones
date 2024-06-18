@@ -26,6 +26,14 @@
   background-color: #002330;
 }
 
+.rightLine {
+  background: linear-gradient(to right, var(--created-tag) 70%, rgba(99, 99, 99, 0));
+}
+
+.leftLine {
+  background: linear-gradient(to right, rgba(99, 99, 99, 0), var(--created-tag) 30%);
+}
+
 .socialMediaLogos {
   width: 100%;
   display: flex;
@@ -66,7 +74,7 @@
   color: #002330;
 }
 
-@media (max-width: 770px) {
+@media (max-width: 908px) {
   .line {
     height: 0;
     width: 0;
