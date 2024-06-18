@@ -34,13 +34,20 @@ _**"Develmatch"** es una plataforma colaborativa donde los usuarios del rubro **
         - [• M̲A̲C̲O̲S̲/̲L̲i̲n̲u̲x̲/̲W̲S̲L̲](#-m̲a̲c̲o̲s̲̲l̲i̲n̲u̲x̲̲w̲s̲l̲)
       - [💻🔚 FRONTEND](#-frontend)
     - [Instalación:](#instalación)
-  - [About us](#about-us)
-    - [💻🔚 FRONTEND:](#-frontend-1)
-      - [👩‍💻 **Elena Expósito Lara**](#-elena-expósito-lara)
-      - [👩‍💻 **Marina Matas Mata**](#-marina-matas-mata)
-      - [👩‍💻 **Laura**](#-laura)
+  - [Roles y respoonsabilidades de los miembros del grupo](#roles-y-respoonsabilidades-de-los-miembros-del-grupo)
     - [🔙🔚 BACKEND:](#-backend-1)
       - [👨‍💻 **Javier Brizuela**](#-javier-brizuela)
+    - [💻🔚 FRONTEND:](#-frontend-1)
+      - [👩‍💻 **Elena Expósito**](#-elena-expósito)
+      - [👩‍💻 **Laura España**](#-laura-españa)
+      - [👩‍💻 **Marina Matas**](#-marina-matas)
+  - [About us](#about-us)
+    - [💻🔚 FRONTEND:](#-frontend-2)
+      - [👩‍💻 **Elena Expósito Lara**](#-elena-expósito-lara)
+      - [👩‍💻 **Marina Matas Mata**](#-marina-matas-mata)
+      - [👩‍💻 **Laura Español**](#-laura-español)
+    - [🔙🔚 BACKEND:](#-backend-2)
+      - [👨‍💻 **Javier Brizuela**](#-javier-brizuela-1)
 
 </details>
 
@@ -169,6 +176,58 @@ $ pyenv global 3.12.3
         $ pipenv run server
         ```
 
+## Roles y respoonsabilidades de los miembros del grupo
+
+### 🔙🔚 BACKEND:
+
+#### 👨‍💻 **Javier Brizuela**
+
+<details>
+<summary>Responsabilidades y Contribuciones</summary>
+
+- **_Responsabilidades_**: Desarrollo completo del backend, asegurando la funcionalidad y cumplimiento del MVP
+- **_Contribuciones_**:
+  - Desarrollo integral de todas las funcionalidades del backend, superando los requisitos del MVP
+  </details>
+
+### 💻🔚 FRONTEND:
+
+#### 👩‍💻 **Elena Expósito**
+
+<details>
+<summary>Responsabilidades y Contribuciones</summary>
+
+- **_Responsabilidades_**: Desarrollo y diseño de interfaces de usuario, implementación de la lógica del frontend, y garantizar la responsividad de los componentes
+- **_Contribuciones_**:
+  - Desarrollo completo de la funcionalidad y lógica de las páginas de Sign Up, detalles de un proyecto, y listado de proyectos
+  - Revisión y mejora del diseño y lógica en la página de Login
+  - Implementación de la lógica y mejoras de estilo en el Header y Footer
+  - Desarrollo de la lógica y mejoras de estilo en la página de Error404
+  - Revisión y mejora de los estilos en la página para crear un proyecto
+  </details>
+
+#### 👩‍💻 **Laura España**
+
+<details>
+<summary>Responsabilidades y Contribuciones</summary>
+
+- **_Responsabilidades_**: Colaboración en el desarrollo de interfaces de usuario y apoyo en la implementación de la lógica del frontend
+- **_Contribuciones_**:
+  - Creación de la estructura y diseño de la página de Login
+  - Creación y colaboración en la implementación de la lógica del código en la página de Login
+  </details>
+
+#### 👩‍💻 **Marina Matas**
+
+<details>
+<summary>Responsabilidades y Contribuciones</summary>
+
+- **_Responsabilidades_**: Desarrollo inicial de la estructura del código y diseño, apoyo en la implementación de estilos y colaboración en la lógica
+- **_Contribuciones_**:
+  - Creación de la estructura básica y diseño del Header, Footer y página de Error404
+  - Inicio de la estructura básica y estilos en la página para crear un proyecto, así como implementación de parte de la lógica
+  </details>
+
 ## About us
 
 ### 💻🔚 FRONTEND:
@@ -193,7 +252,7 @@ $ pyenv global 3.12.3
 
 </details>
 
-#### 👩‍💻 **Laura**
+#### 👩‍💻 **Laura Español**
 
 <details>
 <summary>Más información:</summary>
