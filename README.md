@@ -55,9 +55,12 @@ _**"Develmatch"** es una plataforma colaborativa donde los usuarios del rubro **
 
 ## Características
 
-- Formulario de Perfil de usuario
-- Proyectos **categorizados** según: creador, tipo, dificultad, status actual y fecha de creación
-- Opción de crear proyectos estando registrado en la plataforma
+- Formulario de registro de usuario
+- Inicio de sesión del usuario
+- Listado de Proyectos **categorizados** según: nombre del proyecto, dificultad, lenguajes utilizados, status actual, creador del proyecto y más información
+- Información detallada de los proyectos: nombre del proyecto, creador del proyecto, tipo, status actual, dificultad, lenguajes utilizados, Link al repositorio, participantes, descripción
+- Opción de solicitar unirse a un proyecto
+- Página Error404
 
 ---
 
@@ -65,25 +68,20 @@ _**"Develmatch"** es una plataforma colaborativa donde los usuarios del rubro **
 
 ### **👀 Échale un vistazo: 👀**
 
-**Login option**
+**Opción de Registro**
+<img src="https://i.imgur.com/kjL0df4.gif" alt="Opción de Registro" width="800"/>
 
-<img src="" alt="Opción de Login" width="800"/>
-
-**Signup option**
-
-<img src="" alt="Opción de Signup" width="800"/>
+**Opción de inicio de sesión**
+<img src="https://i.imgur.com/1Ubv8pD.gif" alt="Opción de Inicio de sesión" width="800"/>
 
 **Listado de proyectos**
+<img src="https://i.imgur.com/88bf5pV.gif" alt="Listado de proyectos" width="800"/>
 
-<img src="" alt="Listado de proyectos" width="800"/>
+**Descripción de un proyecto y solicitud para unirse**
+<img src="https://i.imgur.com/oOomqCt.gif" alt="Descripción de los proyectos y solicitud para unirse" width="800"/>
 
-**Creación de proyectos**
-
-<img src="" alt="Creación de proyectos" width="800"/>
-
-**Descripción de los proyectos**
-
-<img src="" alt="Descripción de los proyectos" width="800"/>
+**Error404**
+<img src="https://i.imgur.com/aC7HoYX.gif" alt="Página de Error404" width="800"/>
 
 </div>
 
