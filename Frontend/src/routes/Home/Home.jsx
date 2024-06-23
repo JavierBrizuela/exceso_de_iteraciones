@@ -1,32 +1,46 @@
 import "./Home.css";
 import Card from "./components/Card";
 import { getProjects } from "../../services/projectsService";
-import { useContext } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { AccessContext } from "../../App";
 import { Link } from "react-router-dom";
 
 function Home() {
   const context = useContext(AccessContext);
-  console.log(context.access);
-  const projects = getProjects();
+
+  const [projects, setProjects] = useState();
+
+  const fetchProjects = useCallback(async () => {
+    const apiProjects = await getProjects(context.access);
+
+    console.log(apiProjects);
+    setProjects(apiProjects.results);
+  }, [context.access]);
+
+  useEffect(() => {
+    if (!projects) {
+      fetchProjects();
+    }
+  }, [fetchProjects, projects]);
 
   return (
     <section className="projects-home">
       <div className="projects">
         <h1 className="projects-title">Descubre algunos de estos proyectos</h1>
         <div className="project-list">
-          {projects.map((project) => (
-            <Card
-              key={project.id}
-              id={project.id}
-              title={project.title}
-              type={project.type}
-              difficulty={project.difficulty}
-              languages={project.languages}
-              created_by={project.created_by}
-              actual_status={project.actual_status}
-            />
-          ))}
+          {projects &&
+            projects.map((project) => (
+              <Card
+                key={project.id}
+                id={project.id}
+                title={project.title}
+                type={project.type}
+                difficulty={project.difficulty}
+                languages={project.languages}
+                created_by={project.created_by}
+                actual_status={project.actual_status}
+              />
+            ))}
         </div>
       </div>
       <div className="create-account-home">

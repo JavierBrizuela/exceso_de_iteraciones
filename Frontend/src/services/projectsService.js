@@ -79,7 +79,20 @@ const projects = [
   },
 ];
 
-export function getProjects() {
+export async function getProjects(token) {
+  const response = await fetch("http://127.0.0.1:8000/api/projects/", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch user data");
+  }
+
+  const projects = await response.json();
+
   return projects;
 }
 
