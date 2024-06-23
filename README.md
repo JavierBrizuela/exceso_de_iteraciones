@@ -270,7 +270,7 @@ $ pyenv global 3.12.3
 <summary>Más información:</summary>
   
 - GitHub: [JavierBrizuela](https://github.com/JavierBrizuela)
-- Linkedin: [JavierBrizuela]()
+- Linkedin: [JavierBrizuela](https://www.linkedin.com/in/javier-brizuela1976/)
   
 </details>
   
