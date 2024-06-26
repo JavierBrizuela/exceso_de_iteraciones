@@ -7,7 +7,7 @@ import Signup from "./routes/Signup/Signup";
 import Details from "./routes/ProjectDetails/ProjectDetails";
 import Signin from "./routes/Signin/Signin";
 import CreateProject from "./routes/CreateProject/CreateProject";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import Error404 from "./routes/Error404/Error404";
 
 const router = createBrowserRouter([
@@ -51,38 +51,52 @@ export const AccessContext = createContext();
 
 function App() {
   const localStorageAccess = localStorage.getItem("access");
+  const localStorageRefresh = localStorage.getItem("refresh");
   const [access, setAccess] = useState(localStorageAccess);
-  const [user, setUser] = useState(null);
+  const [refresh, setRefresh] = useState(localStorageRefresh);
+  const [user, setUser] = useState();
+
+  const fetchUserData = useCallback(
+    async (token) => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/profile-update/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok && !!refresh) {
+          const newAccessResponse = await fetch("http://127.0.0.1:8000/api/login/refresh", {
+            method: "POST",
+            body: {
+              refresh,
+            },
+          });
+
+          const newAccess = await newAccessResponse.json();
+          localStorage.setItem("access", newAccess.access);
+          setAccess(newAccess.access);
+        }
+
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    },
+    [refresh],
+  );
 
   useEffect(() => {
-    if (access) {
+    if (access && !user) {
       fetchUserData(access);
     }
-  }, [access]);
-
-  const fetchUserData = async (token) => {
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/profile-update/", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch user data");
-      }
-
-      const userData = await response.json();
-      setUser(userData);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  }, [access, fetchUserData, user]);
 
   return (
     <>
-      <AccessContext.Provider value={{ access, setAccess, user, setUser }}>
+      <AccessContext.Provider value={{ access, setAccess, user, setUser, refresh, setRefresh }}>
         <Toaster />
         <RouterProvider router={router} />
       </AccessContext.Provider>

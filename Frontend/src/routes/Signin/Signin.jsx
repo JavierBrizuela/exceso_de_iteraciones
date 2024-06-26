@@ -38,6 +38,7 @@ function Signin() {
       localStorage.setItem("access", responseData.access);
       localStorage.setItem("refresh", responseData.refresh);
       context.setAccess(responseData.access);
+      context.setRefresh(responseData.refresh);
 
       navigate("/");
     } catch (error) {
