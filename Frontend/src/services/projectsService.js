@@ -5,7 +5,7 @@ const projects = [
     type: "educacion",
     difficulty: "beginner",
     languages: ["JavaScript", "TypeScript"],
-    created_by: "PepitoRubio",
+    created_by_username: "PepitoRubio",
     actual_status: "waiting",
     repository: "https://blabla.com",
     members: ["UsuarioJuan", "UsuarioPaco"],
@@ -18,7 +18,7 @@ const projects = [
     type: "finanza",
     difficulty: "intermediate",
     languages: ["JavaScript", "TypeScript"],
-    created_by: "OtroUsuario",
+    created_by_username: "OtroUsuario",
     actual_status: "finished",
     repository: "https://blabla2.com",
     members: ["UsuarioAna", "UsuarioBanana", "UsuarioRafa", "UsuarioAntonio", "UsuarioLola"],
@@ -31,7 +31,7 @@ const projects = [
     type: "e_commerce",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
-    created_by: "OtroUsuarioTres",
+    created_by_username: "OtroUsuarioTres",
     actual_status: "in_progress",
     repository: "https://blabla3.com",
     members: ["UsuarioRodolfo", "UsuarioLola"],
@@ -44,7 +44,7 @@ const projects = [
     type: "machine_learning",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
-    created_by: "OtroUsuarioCuatro",
+    created_by_username: "OtroUsuarioCuatro",
     actual_status: "cancelled",
     repository: "https://blabla4.com",
     members: ["UsuarioAlfonso", "UsuarioMaría", "UsuarioRafa", "UsuarioAntonio"],
@@ -57,7 +57,7 @@ const projects = [
     type: "otros",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
-    created_by: "OtroUsuarioCinco",
+    created_by_username: "OtroUsuarioCinco",
     actual_status: "cancelled",
     repository: "https://blabla5.com",
     members: ["UsuarioRosa", "UsuarioCarolina", "UsuarioAntonio"],
@@ -70,7 +70,7 @@ const projects = [
     type: "otros",
     difficulty: "advanced",
     languages: ["JavaScript", "TypeScript"],
-    created_by: "OtroUsuarioSeis",
+    created_by_username: "OtroUsuarioSeis",
     actual_status: "cancelled",
     repository: "https://blabla6.com",
     members: ["UsuarioSara", "UsuarioRafa", "UsuarioAntonio"],
@@ -79,11 +79,15 @@ const projects = [
   },
 ];
 
+export function getFakeProjects() {
+  return projects;
+}
+
 export async function getProjects(token) {
   const response = await fetch("http://127.0.0.1:8000/api/projects/", {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : undefined,
     },
   });
 
@@ -96,6 +100,19 @@ export async function getProjects(token) {
   return projects;
 }
 
-export function getProject(id) {
-  return projects.find((project) => project.id === id);
+export async function getProject(id, token) {
+  const response = await fetch(`http://127.0.0.1:8000/api/projects/${id}/`, {
+    method: "GET",
+    headers: {
+      Authorization: token ? `Bearer ${token}` : undefined,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch user data");
+  }
+
+  const project = await response.json();
+
+  return project;
 }

@@ -17,7 +17,6 @@ function Signin() {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
       const response = await fetch("http://127.0.0.1:8000/api/login/", {
         method: "POST",
         headers: {
@@ -38,7 +37,6 @@ function Signin() {
       const responseData = await response.json();
       localStorage.setItem("access", responseData.access);
       localStorage.setItem("refresh", responseData.refresh);
-      console.log(data);
       context.setAccess(responseData.access);
 
       navigate("/");

@@ -51,7 +51,6 @@ export const AccessContext = createContext();
 
 function App() {
   const localStorageAccess = localStorage.getItem("access");
-  console.log(localStorageAccess);
   const [access, setAccess] = useState(localStorageAccess);
   const [user, setUser] = useState(null);
 

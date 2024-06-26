@@ -13,7 +13,6 @@ function Home() {
   const fetchProjects = useCallback(async () => {
     const apiProjects = await getProjects(context.access);
 
-    console.log(apiProjects);
     setProjects(apiProjects.results);
   }, [context.access]);
 
@@ -37,7 +36,7 @@ function Home() {
                 type={project.type}
                 difficulty={project.difficulty}
                 languages={project.languages}
-                created_by={project.created_by}
+                created_by={project.created_by_username}
                 actual_status={project.actual_status}
               />
             ))}

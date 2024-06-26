@@ -15,7 +15,6 @@ function Signup() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
     fetch("http://127.0.0.1:8000/api/signup/", {
       method: "POST",
       headers: {
@@ -37,7 +36,6 @@ function Signup() {
           toast.success("¡Registro exitoso! Ahora inicia tu sesión");
           navigate("/signin");
         }
-        console.log(data);
       });
   };
 

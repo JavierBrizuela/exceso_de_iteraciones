@@ -2,12 +2,26 @@ import { useParams, Link } from "react-router-dom";
 import "./ProjectDetails.css";
 import { getProject } from "../../services/projectsService";
 import { toast } from "react-hot-toast";
+import { useContext, useState, useCallback, useEffect } from "react";
+import { AccessContext } from "../../App";
+import { DIFFICULTY_LEVEL, STATUS } from "../../constants/project";
 
 function Details() {
   const params = useParams();
-  const projectId = parseInt(params.projectId);
-  const project = getProject(projectId);
-  console.log(project, params.projectId);
+  const { access } = useContext(AccessContext);
+  const [project, setProject] = useState();
+
+  const fetchProjects = useCallback(async () => {
+    const apiProject = await getProject(params.projectId, access);
+
+    setProject(apiProject);
+  }, [access, params.projectId]);
+
+  useEffect(() => {
+    if (!project) {
+      fetchProjects();
+    }
+  }, [fetchProjects, project]);
 
   if (!project) {
     return <Link to="/*" />;
@@ -17,12 +31,12 @@ function Details() {
     title,
     type,
     difficulty,
-    languages,
+    technology: projectTechnology,
     created_by,
     actual_status,
     repository,
     description,
-    members,
+    team_members: projectMembers,
   } = project;
 
   const copyToClipboard = (text) => {
@@ -36,6 +50,9 @@ function Details() {
     );
   };
 
+  const technologies = projectTechnology || [];
+  const members = projectMembers || [];
+
   return (
     <div className="project-wrapper">
       <div className="project-title">
@@ -47,20 +64,22 @@ function Details() {
         <label>
           <i className="created-by-user-icon"></i>
         </label>
-        <span className="project-tag-created-by">{created_by}</span>
+        <span className="project-tag-created-by">{created_by.username}</span>
       </div>
       <div className="project-basic-info-center">
         <div className="project-basic-info">
           <div className="tags-wrapper">
             <div className="project-tags-type-difficulty">
               <span className="project-tag project-details-type">{type}</span>
-              <span className="project-tag project-details-status">{actual_status}</span>
-              <span className="project-tag project-details-difficulty">{difficulty}</span>
+              <span className="project-tag project-details-status">{STATUS[actual_status]}</span>
+              <span className="project-tag project-details-difficulty">
+                {DIFFICULTY_LEVEL[difficulty]}
+              </span>
             </div>
             <div className="project-tags-languages">
-              {languages.map((language) => (
-                <span key={language} className="project-tag project-details-language">
-                  {language}
+              {technologies.map((technology) => (
+                <span key={technology.id} className="project-tag project-details-language">
+                  {technology.name}
                 </span>
               ))}
             </div>
@@ -83,8 +102,8 @@ function Details() {
               <h3 className="project-info">Participantes</h3>
               <div className="project-team">
                 {members.map((member) => (
-                  <span key={member} className="project-member-team">
-                    {member}
+                  <span key={member.id} className="project-member-team">
+                    {member.username}
                   </span>
                 ))}
               </div>

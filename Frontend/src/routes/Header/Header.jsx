@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Header() {
   const { user, setAccess, setUser } = useContext(AccessContext);
   const navigate = useNavigate();
-  console.log(user);
 
   const handleLogout = () => {
     localStorage.removeItem("access");
