@@ -1,19 +1,18 @@
-import "./CreateProject.css";
 import { useState } from "react";
-import toast from "react-hot-toast";
+
+import { useForm } from "react-hook-form";
+import "./CreateProject.css";
 
 function CreateProject() {
-  const [formData, setFormData] = useState({
-    title: "",
-    rolUser: "",
-    type: "",
-    difficulty: "",
-    languages: [],
-    description: "",
-    repository: "",
-    participants: [{ nombre: "" }],
-  });
-  const [error, setError] = useState("");
+  const [participants, setParticipants] = useState([]);
+  const [numParticipants, setNumParticipants] = useState(0);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const languagesList = [
     "JavaScript",
     "Python",
@@ -29,46 +28,8 @@ function CreateProject() {
     "Otros",
   ];
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    if (name.includes("-")) {
-      const [field, index] = name.split("-");
-      const newParticipants = formData.participants.map((participant, i) =>
-        i === parseInt(index) ? { ...participant, [field]: value } : participant,
-      );
-      setFormData({
-        ...formData,
-        participants: newParticipants,
-      });
-    } else if (name === "languages") {
-      const newLanguages = checked
-        ? [...formData.languages, value]
-        : formData.languages.filter((lang) => lang !== value);
-
-      setFormData({
-        ...formData,
-        languages: newLanguages,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.languages.length === 0) {
-      setError("Debes seleccionar al menos un lenguaje.");
-      toast.error("Debes seleccionar al menos un lenguaje.");
-    } else {
-      setError("");
-      toast.success("Formulario enviado correctamente");
-      // Aquí puedes manejar el envío del formulario (por ejemplo, enviar los datos a una API)
-      console.log("Datos del formulario:", formData);
-    }
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   const optionsDifficulty = [
@@ -86,19 +47,14 @@ function CreateProject() {
     { value: "otros_tipos", label: "Otros tipos" },
   ];
 
-  const agregarUsuario = () => {
-    setFormData({
-      ...formData,
-      participants: [...formData.participants, { nombre: "" }],
-    });
+  const addParticipant = () => {
+    setNumParticipants((prev) => prev + 1);
+    setParticipants((prev) => [...prev, numParticipants]);
   };
 
-  const eliminarUsuario = (index) => {
-    setFormData({
-      ...formData,
-      participants: formData.participants.filter((_, i) => i !== index),
-    });
-  };
+  /* const removeParticipant = (value) => {
+    setParticipants((prev) => prev.filter((p) => p !== value));
+  }; */
 
   return (
     <div className="new-project-wrapper">
@@ -107,29 +63,22 @@ function CreateProject() {
           <h1 className="new-project-title-text">Nuevo proyecto</h1>
         </div>
       </div>
-      <form className="new-form" onSubmit={handleSubmit}>
+      <form className="new-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="new-project-username-info">
           <label className="new-project-info">Nombre del proyecto</label>
           <input
             className="new-project-tag-created-by"
             type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
+            {...register("title", { required: "El nombre del proyecto es obligatorio" })}
           />
+          {errors.title && <span>{errors.title.message}</span>}
         </div>
         <div className="new-project-username-info">
           <label className="new-project-info">Tu rol</label>
           <input
             className="new-project-tag-created-by"
             type="text"
-            id="rolUser"
-            name="rolUser"
-            value={formData.rolUser}
-            onChange={handleChange}
-            required
+            {...register("creatorRole", { required: "Tu rol es obligatorio" })}
           />
         </div>
         <div className="new-project-basic-info-center">
@@ -142,11 +91,7 @@ function CreateProject() {
                   <input
                     className="new-project-member-team"
                     type="text"
-                    id="repository"
-                    name="repository"
-                    value={formData.repository}
-                    onChange={handleChange}
-                    required
+                    {...register("repository")}
                   />
                 </div>
               </div>
@@ -154,45 +99,33 @@ function CreateProject() {
                 <h3 className="new-project-info">Dificultad</h3>
                 <select
                   className="new-desplegable-select"
-                  id="difficulty"
-                  name="difficulty"
-                  value={formData.difficulty}
-                  onChange={handleChange}
-                  required>
+                  {...register("difficulty", { required: "La dificultad es obligatoria" })}>
                   {optionsDifficulty.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
                   ))}
                 </select>
+                {errors.difficulty && <span>{errors.difficulty.message}</span>}
               </div>
               <div className="new-input">
                 <h3 className="new-project-info">Tipo de proyecto</h3>
                 <select
                   className="new-desplegable-select"
-                  id="type"
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  required>
+                  {...register("type", { required: "El tipo es obligatorio" })}>
                   {optionsType.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
                   ))}
                 </select>
+                {errors.type && <span>{errors.type.message}</span>}
               </div>
               <div className="new-input">
                 <h3>Lenguajes:</h3>
                 {languagesList.map((lang, index) => (
                   <div key={index}>
-                    <input
-                      type="checkbox"
-                      name="languages"
-                      value={lang}
-                      checked={formData.languages.includes(lang)}
-                      onChange={handleChange}
-                    />
+                    <input type="checkbox" {...register(`languages.${lang}`)} />
                     {lang}
                   </div>
                 ))}
@@ -203,27 +136,23 @@ function CreateProject() {
                   <h3 className="new-project-info">Participantes</h3>
                   <button
                     type="button"
-                    onClick={agregarUsuario}
+                    onClick={addParticipant}
                     className="new-button-request-join new-add">
                     +
                   </button>
-                  {formData.participants.map((participant, index) => (
+                  {participants.map((participant, index) => (
                     <div key={index} className="new-new-participant">
                       <input
                         className="new-project-member-team"
                         type="text"
-                        id={`user${index}`}
-                        name={`nombre-${index}`}
-                        value={participant.nombre}
-                        onChange={handleChange}
-                        required
+                        {...register(`participants.nombre-${participant}`)}
                       />
-                      <button
+                      {/* <button
                         type="button"
-                        onClick={() => eliminarUsuario(index)}
+                        onClick={() => removeParticipant(index)}
                         className="new-button-request-join">
                         X
-                      </button>
+                      </button> */}
                     </div>
                   ))}
                 </div>
@@ -233,11 +162,7 @@ function CreateProject() {
                 <textarea
                   className="new-description-text"
                   type="text"
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  required
+                  {...register("description")}
                 />
               </div>
               <button type="submit" className="new-button-request-join">
