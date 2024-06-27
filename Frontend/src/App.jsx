@@ -69,9 +69,12 @@ function App() {
         if (!response.ok && !!refresh) {
           const newAccessResponse = await fetch("http://127.0.0.1:8000/api/login/refresh", {
             method: "POST",
-            body: {
-              refresh,
+            headers: {
+              "Content-Type": "application/json",
             },
+            body: JSON.stringify({
+              refresh,
+            }),
           });
 
           const newAccess = await newAccessResponse.json();
