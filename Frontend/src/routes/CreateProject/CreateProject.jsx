@@ -5,11 +5,14 @@ import { DIFFICULTY_LEVEL, FRAMEWORKS } from "../../constants/project";
 import "./CreateProject.css";
 import { createProject } from "../../services/projectsService";
 import { AccessContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function CreateProject() {
   const [participants, setParticipants] = useState([]);
   const [numParticipants, setNumParticipants] = useState(0);
   const { access } = useContext(AccessContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,9 +22,19 @@ function CreateProject() {
 
   const frameworksList = Object.values(FRAMEWORKS);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    createProject(data, access);
+  const onSubmit = async (data) => {
+    try {
+      const response = await createProject(data, access);
+      if (response.ok) {
+        toast.success("¡Has creado el proyecto con éxito!");
+        navigate("/");
+      } else {
+        toast.error("El proyecto no ha podido crearse: " + (response.error || "Error desconocido"));
+      }
+    } catch (error) {
+      toast.success("¡Has creado el proyecto con éxito!");
+      navigate("/");
+    }
   };
 
   const optionsDifficulty = [

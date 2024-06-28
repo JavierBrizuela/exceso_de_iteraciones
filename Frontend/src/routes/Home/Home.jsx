@@ -27,7 +27,7 @@ function Home() {
       <div className="projects">
         <h1 className="projects-title">Descubre algunos de estos proyectos</h1>
         <Link className="create-project-button" to={"/createproject"}>
-          Crea un nuevo proyecto
+          Crea un nuevo proyecto (<em>solo usuarios Registrados)</em>
         </Link>
         <div className="project-list">
           {projects &&
