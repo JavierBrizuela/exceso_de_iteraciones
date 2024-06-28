@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
+import { DIFFICULTY_LEVEL, FRAMEWORKS } from "../../constants/project";
 import "./CreateProject.css";
+import { createProject } from "../../services/projectsService";
+import { AccessContext } from "../../App";
 
 function CreateProject() {
   const [participants, setParticipants] = useState([]);
   const [numParticipants, setNumParticipants] = useState(0);
+  const { access } = useContext(AccessContext);
 
   const {
     register,
@@ -13,30 +17,16 @@ function CreateProject() {
     formState: { errors },
   } = useForm();
 
-  const languagesList = [
-    "JavaScript",
-    "Python",
-    "C",
-    "C++",
-    "Java",
-    "C#",
-    "SQL",
-    "Go",
-    "PHP",
-    "Visual Basic",
-    "Fortran",
-    "Otros",
-  ];
+  const frameworksList = Object.values(FRAMEWORKS);
 
   const onSubmit = (data) => {
     console.log(data);
+    createProject(data, access);
   };
 
   const optionsDifficulty = [
     { value: "", label: "Selecciona una opción" },
-    { value: "principiante", label: "Principiante" },
-    { value: "intermedio", label: "Intermedio" },
-    { value: "avanzado", label: "Avanzado" },
+    ...Object.entries(DIFFICULTY_LEVEL).map(([key, value]) => ({ value: key, label: value })),
   ];
 
   const optionsType = [
@@ -122,11 +112,11 @@ function CreateProject() {
                 {errors.type && <span>{errors.type.message}</span>}
               </div>
               <div className="new-input">
-                <h3>Lenguajes:</h3>
-                {languagesList.map((lang, index) => (
+                <h3>Frameworks:</h3>
+                {frameworksList.map((framework, index) => (
                   <div key={index}>
-                    <input type="checkbox" {...register(`languages.${lang}`)} />
-                    {lang}
+                    <input type="checkbox" {...register(`frameworks.${framework}`)} />
+                    {framework}
                   </div>
                 ))}
               </div>

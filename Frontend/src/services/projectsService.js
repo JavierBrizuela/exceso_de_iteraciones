@@ -1,3 +1,5 @@
+import { FRAMEWORKS as FRAMEWORKS } from "../constants/project";
+
 const projects = [
   {
     id: 1,
@@ -84,7 +86,7 @@ export function getFakeProjects() {
 }
 
 export async function getProjects(token) {
-  const response = await fetch("http://127.0.0.1:8000/api/projects/", {
+  const response = await fetch("http://127.0.0.1:8000/api/projects/?page_size=100", {
     method: "GET",
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
@@ -115,4 +117,55 @@ export async function getProject(id, token) {
   const project = await response.json();
 
   return project;
+}
+
+export async function createProject(params, token) {
+  const projectBody = {
+    title: params.title,
+    type: params.type,
+    description: params.description,
+    difficulty: params.difficulty,
+    repository: params.difficulty,
+    actual_status: 0,
+  };
+
+  const projectResponse = await fetch("http://127.0.0.1:8000/api/projects/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : undefined,
+    },
+    body: JSON.stringify(projectBody),
+  });
+
+  if (!projectResponse.ok) {
+    throw new Error(projectResponse);
+  }
+
+  const newProject = await projectResponse.json();
+
+  const newProjectId = newProject.id;
+
+  const frameworks = Object.entries(params.frameworks)
+    .filter(([, val]) => val)
+    .map(([key]) => key);
+
+  const frameworkNumbers = frameworks.map(
+    (lang) => Object.entries(FRAMEWORKS).find(([, value]) => value === lang)?.[0],
+  );
+
+  await Promise.allSettled(
+    frameworkNumbers.map((lang) => {
+      return fetch(`http://127.0.0.1:8000/api/projects/${newProjectId}/technology/${lang}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : undefined,
+        },
+        body: JSON.stringify(projectBody),
+      });
+    }),
+  );
+
+  console.log(newProject);
 }
