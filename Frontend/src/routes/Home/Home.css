@@ -17,6 +17,29 @@
   color: var(--dark-blue);
 }
 
+.create-project-button {
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  background-color: var(--dark-blue);
+  color: var(--font-color);
+  transition: all 0.6s ease;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.create-project-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background: linear-gradient(to bottom, var(--blue), var(--green));
+  box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.548);
+}
+
 .project-list {
   display: flex;
   flex-wrap: wrap;
