@@ -26,9 +26,11 @@ function Home() {
     <section className="projects-home">
       <div className="projects">
         <h1 className="projects-title">Descubre algunos de estos proyectos</h1>
-        <Link className="create-project-button" to={"/createproject"}>
-          Crea un nuevo proyecto (<em>solo usuarios Registrados)</em>
-        </Link>
+        {context.user && (
+          <Link className="create-project-button" to={"/createproject"}>
+            Crea un nuevo proyecto
+          </Link>
+        )}
         <div className="project-list">
           {projects &&
             projects.map((project) => (

@@ -4,6 +4,7 @@ import Input from "./components/Input";
 import "./Signup.css";
 import { toast } from "react-hot-toast";
 import { signUp } from "../../services/authService";
+import { isAxiosError } from "axios";
 
 function Signup() {
   const {
@@ -15,15 +16,21 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    signUp(data).then((data) => {
-      if (data.email?.includes("Ya existe Usuario con este email.")) {
+  const onSubmit = async (data) => {
+    try {
+      await signUp(data);
+
+      toast.success("¡Registro exitoso! Ahora inicia tu sesión");
+      navigate("/signin");
+    } catch (error) {
+      if (
+        isAxiosError(error) &&
+        error.response.data.email?.includes("Ya existe Usuario con este email.")
+      ) {
         toast.error("Ya existe un usuario con este email");
-      } else {
-        toast.success("¡Registro exitoso! Ahora inicia tu sesión");
-        navigate("/signin");
       }
-    });
+      console.error(error);
+    }
   };
 
   const password = watch("password", "");

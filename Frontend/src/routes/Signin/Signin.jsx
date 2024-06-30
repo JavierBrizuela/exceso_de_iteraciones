@@ -5,6 +5,7 @@ import "./Signin.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AccessContext } from "../../App";
 import { signIn } from "../../services/authService";
+import { isAxiosError } from "axios";
 
 function Signin() {
   const {
@@ -27,10 +28,10 @@ function Signin() {
 
       navigate("/");
     } catch (error) {
-      if (error.name === "TypeError") {
-        setApiError("Algo ha ido mal");
+      if (isAxiosError(error) && error.response.data.detail) {
+        setApiError(error.response.data.detail);
       } else {
-        setApiError(error.message);
+        setApiError("Algo ha ido mal");
       }
     }
   };
