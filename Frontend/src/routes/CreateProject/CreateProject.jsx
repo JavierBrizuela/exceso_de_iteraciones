@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { DIFFICULTY_LEVEL, FRAMEWORKS } from "../../constants/project";
 import "./CreateProject.css";
 import { createProject } from "../../services/projectsService";
@@ -16,17 +16,7 @@ function CreateProject() {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm();
-
-  const {
-    fields: participantFields,
-    append,
-    remove,
-  } = useFieldArray({
-    control,
-    name: "participants",
-  });
 
   const frameworksList = Object.values(FRAMEWORKS);
 
@@ -53,14 +43,6 @@ function CreateProject() {
     { value: "e_commerce", label: "E-commerce" },
     { value: "machine_learning", label: "Machine learning" },
   ];
-
-  const addParticipant = () => {
-    append();
-  };
-
-  const removeParticipant = (index) => () => {
-    remove(index);
-  };
 
   return (
     <div className="new-project-wrapper">
@@ -129,41 +111,14 @@ function CreateProject() {
               </div>
               <div className="new-input">
                 <h3>Frameworks:</h3>
-                {frameworksList.map((framework, index) => (
-                  <div key={index}>
+                {frameworksList.map((framework) => (
+                  <div key={framework}>
                     <input type="checkbox" {...register(`frameworks.${framework}`)} />
                     {framework}
                   </div>
                 ))}
               </div>
               <span className="new-separator-horizontal"></span>
-              <div className="new-project-info-members">
-                <div className="new-input">
-                  <h3 className="new-project-info">Participantes</h3>
-                  <button
-                    type="button"
-                    onClick={addParticipant}
-                    className="new-button-request-join new-add">
-                    +
-                  </button>
-                  {participantFields.map((participant, index) => (
-                    <div key={participant.id} className="new-new-participant">
-                      <input
-                        key={participant.id}
-                        className="new-project-member-team"
-                        type="text"
-                        {...register(`participants.${index}.value`)}
-                      />
-                      <button
-                        type="button"
-                        onClick={removeParticipant(index)}
-                        className="new-button-request-join">
-                        X
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
               <div className="new-input">
                 <h3 className="new-project-info">Descripción</h3>
                 <textarea
