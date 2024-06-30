@@ -1,10 +1,11 @@
 import axios from "axios";
 import { FRAMEWORKS } from "../constants/project";
 
-export async function getProjects() {
+export async function getProjects(page, pageSize = 50) {
   const response = await axios.get("http://127.0.0.1:8000/api/projects/", {
     params: {
-      page_size: 100,
+      page,
+      page_size: pageSize,
     },
   });
 
@@ -26,7 +27,7 @@ export async function createProject(params, token) {
       type: params.type,
       description: params.description,
       difficulty: params.difficulty,
-      repository: params.difficulty,
+      repository: params.repository,
       actual_status: 0,
     },
     {

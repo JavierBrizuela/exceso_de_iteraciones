@@ -1,26 +1,36 @@
 import "./Home.css";
 import Card from "./components/Card";
 import { getProjects } from "../../services/projectsService";
-import { useContext, useState, useEffect, useCallback } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AccessContext } from "../../App";
 import { Link } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Home() {
   const context = useContext(AccessContext);
 
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState([]);
 
-  const fetchProjects = useCallback(async () => {
-    const apiProjects = await getProjects(context.access);
-
-    setProjects(apiProjects.results);
-  }, [context.access]);
+  const [hasMore, setHasMore] = useState(true);
+  const [index, setIndex] = useState(2);
 
   useEffect(() => {
-    if (!projects) {
-      fetchProjects();
-    }
-  }, [fetchProjects, projects]);
+    getProjects(1)
+      .then((data) => setProjects(data.results))
+      .catch((err) => console.error(err.message));
+  }, []);
+
+  const fetchMoreData = () => {
+    getProjects(index)
+      .then((res) => {
+        setProjects((prevs) => [...prevs, ...res.results]);
+
+        res.results.length > 0 ? setHasMore(true) : setHasMore(false);
+      })
+      .catch((err) => console.log(err));
+
+    setIndex((prevIndex) => prevIndex + 1);
+  };
 
   return (
     <section className="projects-home">
@@ -31,21 +41,27 @@ function Home() {
             Crea un nuevo proyecto
           </Link>
         )}
-        <div className="project-list">
-          {projects &&
-            projects.map((project) => (
-              <Card
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                type={project.type}
-                difficulty={project.difficulty}
-                technologies={project.technology}
-                created_by={project.created_by_username}
-                actual_status={project.actual_status}
-              />
-            ))}
-        </div>
+        <InfiniteScroll
+          dataLength={projects.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          scrollThreshold={0.8}>
+          <div className="project-list">
+            {projects &&
+              projects.map((project) => (
+                <Card
+                  key={project.id}
+                  id={project.id}
+                  title={project.title}
+                  type={project.type}
+                  difficulty={project.difficulty}
+                  technologies={project.technology}
+                  created_by={project.created_by_username}
+                  actual_status={project.actual_status}
+                />
+              ))}
+          </div>
+        </InfiniteScroll>
       </div>
       <div className="create-account-home">
         <div className="account-home-text">
