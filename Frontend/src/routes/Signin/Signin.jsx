@@ -4,6 +4,7 @@ import Input from "./components/Input";
 import "./Signin.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AccessContext } from "../../App";
+import { signIn } from "../../services/authService";
 
 function Signin() {
   const {
@@ -17,24 +18,8 @@ function Signin() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        //mode: 'no-cors',
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
-      });
+      const responseData = await signIn(data);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || "Something went wrong");
-      }
-
-      const responseData = await response.json();
       localStorage.setItem("access", responseData.access);
       localStorage.setItem("refresh", responseData.refresh);
       context.setAccess(responseData.access);

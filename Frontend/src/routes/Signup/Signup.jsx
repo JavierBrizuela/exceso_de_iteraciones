@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "./components/Input";
 import "./Signup.css";
 import { toast } from "react-hot-toast";
+import { signUp } from "../../services/authService";
 
 function Signup() {
   const {
@@ -15,28 +16,14 @@ function Signup() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    fetch("http://127.0.0.1:8000/api/signup/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: data.email,
-        first_name: data.nombre,
-        last_name: data.apellido,
-        username: data.username,
-        password: data.password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.email?.includes("Ya existe Usuario con este email.")) {
-          toast.error("Ya existe un usuario con este email");
-        } else {
-          toast.success("¡Registro exitoso! Ahora inicia tu sesión");
-          navigate("/signin");
-        }
-      });
+    signUp(data).then((data) => {
+      if (data.email?.includes("Ya existe Usuario con este email.")) {
+        toast.error("Ya existe un usuario con este email");
+      } else {
+        toast.success("¡Registro exitoso! Ahora inicia tu sesión");
+        navigate("/signin");
+      }
+    });
   };
 
   const password = watch("password", "");
