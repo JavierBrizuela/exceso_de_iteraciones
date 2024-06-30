@@ -20,3 +20,19 @@ export async function signIn(params) {
 
   return response.data;
 }
+
+export async function getUserData(access) {
+  const response = await axios.get("http://127.0.0.1:8000/api/profile-update/", {
+    headers: {
+      Authorization: `Bearer ${access}`,
+    },
+  });
+
+  return response.data;
+}
+
+export async function signInRefresh(refresh) {
+  const response = await fetch("http://127.0.0.1:8000/api/login/refresh", { refresh });
+
+  return response.data;
+}

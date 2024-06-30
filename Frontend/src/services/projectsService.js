@@ -1,64 +1,42 @@
+import axios from "axios";
 import { FRAMEWORKS } from "../constants/project";
 
-export async function getProjects(token) {
-  const response = await fetch("http://127.0.0.1:8000/api/projects/?page_size=100", {
-    method: "GET",
-    headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
+export async function getProjects() {
+  const response = await axios.get("http://127.0.0.1:8000/api/projects/", {
+    params: {
+      page_size: 100,
     },
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch user data");
-  }
-
-  const projects = await response.json();
-
-  return projects;
+  return response.data;
 }
 
-export async function getProject(id, token) {
-  const response = await fetch(`http://127.0.0.1:8000/api/projects/${id}/`, {
-    method: "GET",
-    headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
-    },
-  });
+export async function getProject(id) {
+  const response = await axios.get(`http://127.0.0.1:8000/api/projects/${id}/`);
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch user data");
-  }
-
-  const project = await response.json();
-
-  return project;
+  return response.data;
 }
 
 export async function createProject(params, token) {
-  const projectBody = {
-    title: params.title,
-    type: params.type,
-    description: params.description,
-    difficulty: params.difficulty,
-    repository: params.difficulty,
-    actual_status: 0,
-  };
-
   // Crea el proyecto
-  const projectResponse = await fetch("http://127.0.0.1:8000/api/projects/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : undefined,
+  const projectResponse = await axios.post(
+    "http://127.0.0.1:8000/api/projects/",
+    {
+      title: params.title,
+      type: params.type,
+      description: params.description,
+      difficulty: params.difficulty,
+      repository: params.difficulty,
+      actual_status: 0,
     },
-    body: JSON.stringify(projectBody),
-  });
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
 
-  if (!projectResponse.ok) {
-    throw new Error(projectResponse);
-  }
-
-  const newProject = await projectResponse.json();
+  const newProject = projectResponse.data;
 
   const frameworks = Object.entries(params.frameworks)
     .filter(([, val]) => val)
@@ -71,22 +49,22 @@ export async function createProject(params, token) {
   // añade los frameworks al proyecto
   await Promise.allSettled(
     frameworkNumbers.map((framework) => {
-      return fetch(`http://127.0.0.1:8000/api/projects/${newProject.id}/technology/${framework}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : undefined,
+      return axios.post(
+        `http://127.0.0.1:8000/api/projects/${newProject.id}/technology/${framework}`,
+        undefined,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
     }),
   );
 
   // Añade al usuario como participante
-  await fetch(`http://127.0.0.1:8000/api/projects/${newProject.id}/member/`, {
-    method: "POST",
+  await axios.post(`http://127.0.0.1:8000/api/projects/${newProject.id}/member/`, undefined, {
     headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : undefined,
+      Authorization: `Bearer ${token}`,
     },
   });
 }

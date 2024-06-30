@@ -9,6 +9,7 @@ import Signin from "./routes/Signin/Signin";
 import CreateProject from "./routes/CreateProject/CreateProject";
 import { createContext, useState, useEffect, useCallback } from "react";
 import Error404 from "./routes/Error404/Error404";
+import { getUserData, signInRefresh } from "./services/authService";
 
 const router = createBrowserRouter([
   {
@@ -59,33 +60,15 @@ function App() {
   const fetchUserData = useCallback(
     async (token) => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/profile-update/", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const userData = await getUserData(token);
 
-        if (!response.ok && !!refresh) {
-          const newAccessResponse = await fetch("http://127.0.0.1:8000/api/login/refresh", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              refresh,
-            }),
-          });
-
-          const newAccess = await newAccessResponse.json();
-          localStorage.setItem("access", newAccess.access);
-          setAccess(newAccess.access);
-        }
-
-        const userData = await response.json();
         setUser(userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
+        const newAccessData = await signInRefresh(refresh);
+
+        localStorage.setItem("access", newAccessData.access);
+        setAccess(newAccessData.access);
       }
     },
     [refresh],
