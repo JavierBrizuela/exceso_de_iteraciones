@@ -5,8 +5,8 @@ import { DIFFICULTY_LEVEL, STATUS } from "../../../constants/project";
 
 import "./Card.css";
 
-function Card({ id, title, type, difficulty, languages, created_by, actual_status }) {
-  const langs = languages || [];
+function Card({ id, title, type, difficulty, technologies, created_by, actual_status }) {
+  const techs = technologies || [];
 
   return (
     <div className="card-wrapper" id={id}>
@@ -18,7 +18,7 @@ function Card({ id, title, type, difficulty, languages, created_by, actual_statu
             <span className="tag project-difficulty">{DIFFICULTY_LEVEL[difficulty]}</span>
           </div>
           <div className="second-division-info">
-            {langs.map((language, index) => (
+            {techs.map((language, index) => (
               <span key={index} className="project-languages">
                 {language}
               </span>
@@ -42,7 +42,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   difficulty: PropTypes.string.isRequired,
-  languages: PropTypes.arrayOf(PropTypes.string),
+  technologies: PropTypes.arrayOf(PropTypes.string),
   created_by: PropTypes.string,
   actual_status: PropTypes.string.isRequired,
 };

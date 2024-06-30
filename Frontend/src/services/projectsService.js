@@ -1,4 +1,4 @@
-import { FRAMEWORKS as FRAMEWORKS } from "../constants/project";
+import { FRAMEWORKS } from "../constants/project";
 
 const projects = [
   {
@@ -129,6 +129,7 @@ export async function createProject(params, token) {
     actual_status: 0,
   };
 
+  // Crea el proyecto
   const projectResponse = await fetch("http://127.0.0.1:8000/api/projects/", {
     method: "POST",
     headers: {
@@ -144,8 +145,6 @@ export async function createProject(params, token) {
 
   const newProject = await projectResponse.json();
 
-  const newProjectId = newProject.id;
-
   const frameworks = Object.entries(params.frameworks)
     .filter(([, val]) => val)
     .map(([key]) => key);
@@ -154,18 +153,25 @@ export async function createProject(params, token) {
     (lang) => Object.entries(FRAMEWORKS).find(([, value]) => value === lang)?.[0],
   );
 
+  // añade los frameworks al proyecto
   await Promise.allSettled(
-    frameworkNumbers.map((lang) => {
-      return fetch(`http://127.0.0.1:8000/api/projects/${newProjectId}/technology/${lang}`, {
+    frameworkNumbers.map((framework) => {
+      return fetch(`http://127.0.0.1:8000/api/projects/${newProject.id}/technology/${framework}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token ? `Bearer ${token}` : undefined,
         },
-        body: JSON.stringify(projectBody),
       });
     }),
   );
 
-  console.log(newProject);
+  // Añade al usuario como participante
+  await fetch(`http://127.0.0.1:8000/api/projects/${newProject.id}/member/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : undefined,
+    },
+  });
 }

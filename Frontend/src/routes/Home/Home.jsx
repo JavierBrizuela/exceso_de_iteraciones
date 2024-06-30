@@ -38,7 +38,7 @@ function Home() {
                 title={project.title}
                 type={project.type}
                 difficulty={project.difficulty}
-                languages={project.languages}
+                technologies={project.technology}
                 created_by={project.created_by_username}
                 actual_status={project.actual_status}
               />

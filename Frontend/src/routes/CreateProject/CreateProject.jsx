@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { DIFFICULTY_LEVEL, FRAMEWORKS } from "../../constants/project";
 import "./CreateProject.css";
 import { createProject } from "../../services/projectsService";
@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function CreateProject() {
-  const [participants, setParticipants] = useState([]);
-  const [numParticipants, setNumParticipants] = useState(0);
   const { access } = useContext(AccessContext);
   const navigate = useNavigate();
 
@@ -18,22 +16,29 @@ function CreateProject() {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
+
+  const {
+    fields: participantFields,
+    append,
+    remove,
+  } = useFieldArray({
+    control,
+    name: "participants",
+  });
 
   const frameworksList = Object.values(FRAMEWORKS);
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
-      const response = await createProject(data, access);
-      if (response.ok) {
-        toast.success("¡Has creado el proyecto con éxito!");
-        navigate("/");
-      } else {
-        toast.error("El proyecto no ha podido crearse: " + (response.error || "Error desconocido"));
-      }
-    } catch (error) {
+      await createProject(data, access);
+
       toast.success("¡Has creado el proyecto con éxito!");
       navigate("/");
+    } catch (error) {
+      toast.error("El proyecto no ha podido crearse: " + (error || "Error desconocido"));
     }
   };
 
@@ -47,17 +52,15 @@ function CreateProject() {
     { value: "educacion", label: "Educación" },
     { value: "e_commerce", label: "E-commerce" },
     { value: "machine_learning", label: "Machine learning" },
-    { value: "otros_tipos", label: "Otros tipos" },
   ];
 
   const addParticipant = () => {
-    setNumParticipants((prev) => prev + 1);
-    setParticipants((prev) => [...prev, numParticipants]);
+    append();
   };
 
-  /* const removeParticipant = (value) => {
-    setParticipants((prev) => prev.filter((p) => p !== value));
-  }; */
+  const removeParticipant = (index) => () => {
+    remove(index);
+  };
 
   return (
     <div className="new-project-wrapper">
@@ -143,19 +146,20 @@ function CreateProject() {
                     className="new-button-request-join new-add">
                     +
                   </button>
-                  {participants.map((participant, index) => (
-                    <div key={index} className="new-new-participant">
+                  {participantFields.map((participant, index) => (
+                    <div key={participant.id} className="new-new-participant">
                       <input
+                        key={participant.id}
                         className="new-project-member-team"
                         type="text"
-                        {...register(`participants.nombre-${participant}`)}
+                        {...register(`participants.${index}.value`)}
                       />
-                      {/* <button
+                      <button
                         type="button"
-                        onClick={() => removeParticipant(index)}
+                        onClick={removeParticipant(index)}
                         className="new-button-request-join">
                         X
-                      </button> */}
+                      </button>
                     </div>
                   ))}
                 </div>
